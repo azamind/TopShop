@@ -91,7 +91,7 @@ namespace TopShopServer.Migrations
 
                     b.Property<decimal?>("Price")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Title")
                         .IsRequired()

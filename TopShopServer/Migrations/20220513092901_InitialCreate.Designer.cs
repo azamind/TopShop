@@ -11,8 +11,8 @@ using TopShopServer.Models;
 namespace TopShopServer.Migrations
 {
     [DbContext(typeof(TopShopContext))]
-    [Migration("20220512185945_InitialCreate2")]
-    partial class InitialCreate2
+    [Migration("20220513092901_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -93,7 +93,7 @@ namespace TopShopServer.Migrations
 
                     b.Property<decimal?>("Price")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Title")
                         .IsRequired()
