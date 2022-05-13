@@ -16,8 +16,6 @@ namespace TopShopServer.Models
         [MaxLength(100)]
         public string? Title { get; set; }
         [Required]
-        public ICollection<Size>? Sizes { get; set; }
-        [Required]
         [Column(TypeName = "decimal(18,2)")]
         public decimal? Price { get; set; }
         [Required]
@@ -27,6 +25,7 @@ namespace TopShopServer.Models
         [Required]
         public string? Description { get; set; }
         [Required]
+        [Column(TypeName = "jsonb")]
         public string? Photo { get; set; }
         public DateTime? CreatedAt { get; set; }  
     }

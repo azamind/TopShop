@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TopShopServer.Models;
 
@@ -10,9 +11,10 @@ using TopShopServer.Models;
 namespace TopShopServer.Migrations
 {
     [DbContext(typeof(TopShopContext))]
-    partial class TopShopContextModelSnapshot : ModelSnapshot
+    [Migration("20220513143618_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.5");
@@ -39,61 +41,61 @@ namespace TopShopServer.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2022, 5, 13, 17, 40, 53, 879, DateTimeKind.Local).AddTicks(2504),
+                            CreatedAt = new DateTime(2022, 5, 13, 17, 36, 18, 330, DateTimeKind.Local).AddTicks(6127),
                             Name = "Nike"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2022, 5, 13, 17, 40, 53, 879, DateTimeKind.Local).AddTicks(2512),
+                            CreatedAt = new DateTime(2022, 5, 13, 17, 36, 18, 330, DateTimeKind.Local).AddTicks(6135),
                             Name = "Adidas"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2022, 5, 13, 17, 40, 53, 879, DateTimeKind.Local).AddTicks(2512),
+                            CreatedAt = new DateTime(2022, 5, 13, 17, 36, 18, 330, DateTimeKind.Local).AddTicks(6136),
                             Name = "Puma"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2022, 5, 13, 17, 40, 53, 879, DateTimeKind.Local).AddTicks(2513),
+                            CreatedAt = new DateTime(2022, 5, 13, 17, 36, 18, 330, DateTimeKind.Local).AddTicks(6136),
                             Name = "Peacful Hooligan"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2022, 5, 13, 17, 40, 53, 879, DateTimeKind.Local).AddTicks(2514),
+                            CreatedAt = new DateTime(2022, 5, 13, 17, 36, 18, 330, DateTimeKind.Local).AddTicks(6137),
                             Name = "The North Face"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTime(2022, 5, 13, 17, 40, 53, 879, DateTimeKind.Local).AddTicks(2514),
+                            CreatedAt = new DateTime(2022, 5, 13, 17, 36, 18, 330, DateTimeKind.Local).AddTicks(6137),
                             Name = "Alpha Industries"
                         },
                         new
                         {
                             Id = 7,
-                            CreatedAt = new DateTime(2022, 5, 13, 17, 40, 53, 879, DateTimeKind.Local).AddTicks(2515),
+                            CreatedAt = new DateTime(2022, 5, 13, 17, 36, 18, 330, DateTimeKind.Local).AddTicks(6138),
                             Name = "Stone Island"
                         },
                         new
                         {
                             Id = 8,
-                            CreatedAt = new DateTime(2022, 5, 13, 17, 40, 53, 879, DateTimeKind.Local).AddTicks(2515),
+                            CreatedAt = new DateTime(2022, 5, 13, 17, 36, 18, 330, DateTimeKind.Local).AddTicks(6138),
                             Name = "Polo Ralph Lauren"
                         },
                         new
                         {
                             Id = 9,
-                            CreatedAt = new DateTime(2022, 5, 13, 17, 40, 53, 879, DateTimeKind.Local).AddTicks(2516),
+                            CreatedAt = new DateTime(2022, 5, 13, 17, 36, 18, 330, DateTimeKind.Local).AddTicks(6139),
                             Name = "Tommy Jeans"
                         },
                         new
                         {
                             Id = 10,
-                            CreatedAt = new DateTime(2022, 5, 13, 17, 40, 53, 879, DateTimeKind.Local).AddTicks(2516),
+                            CreatedAt = new DateTime(2022, 5, 13, 17, 36, 18, 330, DateTimeKind.Local).AddTicks(6139),
                             Name = "thisisneverthat"
                         });
                 });
@@ -123,31 +125,31 @@ namespace TopShopServer.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2022, 5, 13, 17, 40, 53, 879, DateTimeKind.Local).AddTicks(2607),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Sneakers"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2022, 5, 13, 17, 40, 53, 879, DateTimeKind.Local).AddTicks(2608),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Hoodies"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2022, 5, 13, 17, 40, 53, 879, DateTimeKind.Local).AddTicks(2609),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "T-shirt"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2022, 5, 13, 17, 40, 53, 879, DateTimeKind.Local).AddTicks(2610),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Jackets"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2022, 5, 13, 17, 40, 53, 879, DateTimeKind.Local).AddTicks(2610),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Jeans"
                         });
                 });
@@ -208,7 +210,7 @@ namespace TopShopServer.Migrations
                             BrandId = 1,
                             CategoryId = 1,
                             Code = "332-847",
-                            CreatedAt = new DateTime(2022, 5, 13, 17, 40, 53, 879, DateTimeKind.Local).AddTicks(2638),
+                            CreatedAt = new DateTime(2022, 5, 13, 17, 36, 18, 330, DateTimeKind.Local).AddTicks(6294),
                             Description = "Nike its a best brand in sneakers category",
                             Photo = "some.jpg",
                             Price = 124.55m,
