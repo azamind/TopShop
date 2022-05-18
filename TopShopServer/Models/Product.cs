@@ -27,6 +27,6 @@ namespace TopShopServer.Models
         [Required]
         [Column(TypeName = "jsonb")]
         public string? Photo { get; set; }
-        public DateTime? CreatedAt { get; set; }  
+        public DateTime? CreatedAt { get; set; } = DateTime.Now;
     }
 }
