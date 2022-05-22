@@ -3,7 +3,7 @@
     public class BaseService
     {
         protected readonly HttpClient _httpClient;
-        protected const string domainUrl = "https://localhost:5001";
+        protected const string domainUrl = "https://localhost:7251";
 
         public BaseService()
         {
