@@ -1,6 +1,7 @@
 using TopShopServer.Models;
 using Microsoft.EntityFrameworkCore;
 using TopShopServer.Repositories.Product;
+using TopShopServer.Repositories.Category;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,7 @@ builder.Services.AddDbContext<TopShopContext>(
         builder.Configuration["ConnectionStrings:TopShopConnectionString"]));
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
