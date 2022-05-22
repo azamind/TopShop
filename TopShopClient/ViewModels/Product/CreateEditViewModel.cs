@@ -1,14 +1,29 @@
-﻿using System.Windows.Input;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
+using TopShopClient.Models;
+using TopShopClient.Services;
 
 namespace TopShopClient.ViewModels.Product
 {
     public class CreateEditViewModel : BaseViewModel
     {
+        public ObservableCollection<Category> Categories { get; set; }
         public ICommand PhotoUploadCommand { get; set; }
+        public ICommand LoadCategoriesCommand { get; set; }
+        public Category SelectedCategory { get; set; }
+        private CategoriesService _categoriesService;
 
-        public CreateEditViewModel()
+        public CreateEditViewModel(CategoriesService categoriesService)
         {
             PhotoUploadCommand = new Command(async () => await ExecutePhotoUploadCommand());
+            LoadCategoriesCommand = new Command(() => GetCategoriesCommand());
+            _categoriesService = categoriesService;
+            Categories = new ObservableCollection<Category>();
+        }
+
+        private async void GetCategoriesCommand()
+        {
+            Categories = new ObservableCollection<Category>(await _categoriesService.GetCategoriesAsync());
         }
 
         private async Task<FileResult> ExecutePhotoUploadCommand()
