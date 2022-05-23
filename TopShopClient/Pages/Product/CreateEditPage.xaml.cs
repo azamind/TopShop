@@ -1,5 +1,3 @@
-using System.Collections.ObjectModel;
-using TopShopClient.Models;
 using TopShopClient.Services;
 using TopShopClient.ViewModels.Product;
 

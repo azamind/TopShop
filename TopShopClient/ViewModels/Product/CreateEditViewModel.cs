@@ -1,7 +1,5 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using TopShopClient.Models;
-using TopShopClient.Services;
 
 namespace TopShopClient.ViewModels.Product
 {
