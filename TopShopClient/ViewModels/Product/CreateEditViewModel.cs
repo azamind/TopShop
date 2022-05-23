@@ -7,33 +7,14 @@ namespace TopShopClient.ViewModels.Product
 {
     public class CreateEditViewModel : BaseViewModel
     {
-        private ObservableCollection<Category> _categories;
-        public ObservableCollection<Category> Categories
-        {
-            get => _categories;
-            set
-            {
-                _categories = value;
-                OnPropertyChanged("Categories");
-            }
-        }
-
+        public ICommand PhotoUploadCommand { get; }
         public Category SelectedCategory { get; set; }
-        private CategoriesService _categoriesService = new CategoriesService();
+        public IList<Category> Categories { get; set; }
 
-        public ICommand PhotoUploadCommand { get; set; }
-        public ICommand LoadCategoriesCommand { get; set; }
-
-        public CreateEditViewModel()
+        public CreateEditViewModel(IList<Category> categories)
         {
+            Categories = categories ?? throw new ArgumentNullException(nameof(categories));
             PhotoUploadCommand = new Command(async () => await ExecutePhotoUploadCommand());
-            LoadCategoriesCommand = new Command(GetCategoriesCommand);
-        }
-
-        private async void GetCategoriesCommand()
-        {
-            Categories = new ObservableCollection<Category>(await _categoriesService.GetCategoriesAsync()) 
-                ?? new ObservableCollection<Category>();
         }
 
         private async Task<FileResult> ExecutePhotoUploadCommand()

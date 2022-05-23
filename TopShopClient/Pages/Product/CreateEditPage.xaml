@@ -5,57 +5,55 @@
              Title="CreateEditPage"
              xmlns:vm="clr-namespace:TopShopClient.ViewModels.Product"
              >
-    <ContentPage.BindingContext>
-        <vm:CreateEditViewModel />
-    </ContentPage.BindingContext>
-    
-    <StackLayout
-        Margin="20,0,20,0"
-        >
-        <Label Text="Title" FontSize="18"/>
-        <Entry
-            x:Name="Title"
-            ClearButtonVisibility="WhileEditing"
-            />
-        <Picker
-            Title="Select Category"
-            FontSize="18"
-            x:Name="Category"
-            ItemsSource="{Binding Categories}"
-            ItemDisplayBinding="{Binding Name}"
-            SelectedItem="{Binding SelectedCategory}"
-            />
-        <Label Text="Code" FontSize="18"/>
-        <Entry
-            x:Name="Code"
-            ClearButtonVisibility="WhileEditing"
-            />
-        <Label Text="Article" FontSize="18"/>
-        <Entry
-            x:Name="Article"
-            ClearButtonVisibility="WhileEditing"
-            />
-        <Label Text="Price" FontSize="18"/>
-        <Entry
-            x:Name="Price"
-            />
-        <Label Text="Description" FontSize="18"/>
-        <Editor
-            HeightRequest="100"
-            x:Name="Description"
-            />
-        <Label Text="Photo" FontSize="18"/>
-        <Button
-            HorizontalOptions="Start"
-            Text="Choose Photo"
-            Command="{Binding PhotoUploadCommand}"
-            />
-        <Button
-            Margin="0, 10, 0, 0"
-            Text="Send"
-            FontAttributes="Bold"
-            FontSize="20"
-            HorizontalOptions="Center"
-            />
-    </StackLayout>
+    <ScrollView>
+        <StackLayout
+            Margin="20,0,20,0"
+            >
+            <Label Text="Title" FontSize="18"/>
+            <Entry
+                x:Name="Title"
+                ClearButtonVisibility="WhileEditing"
+                />
+            <Picker
+                Title="Select Category"
+                FontSize="18"
+                x:Name="Category"
+                ItemsSource="{Binding Categories}"
+                ItemDisplayBinding="{Binding Name}"
+                SelectedItem="{Binding SelectedCategory}"
+                />
+            <Label Text="Code" FontSize="18"/>
+            <Entry
+                x:Name="Code"
+                ClearButtonVisibility="WhileEditing"
+                />
+            <Label Text="Article" FontSize="18"/>
+            <Entry
+                x:Name="Article"
+                ClearButtonVisibility="WhileEditing"
+                />
+            <Label Text="Price" FontSize="18"/>
+            <Entry
+                x:Name="Price"
+                />
+            <Label Text="Description" FontSize="18"/>
+            <Editor
+                HeightRequest="100"
+                x:Name="Description"
+                />
+            <Label Text="Photo" FontSize="18"/>
+            <Button
+                HorizontalOptions="Start"
+                Text="Choose Photo"
+                Command="{Binding PhotoUploadCommand}"
+                />
+            <Button
+                Margin="0, 10, 0, 0"
+                Text="Send"
+                FontAttributes="Bold"
+                FontSize="20"
+                HorizontalOptions="Center"
+                />
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
