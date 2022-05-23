@@ -15,6 +15,14 @@
                 ClearButtonVisibility="WhileEditing"
                 />
             <Picker
+                Title="Select Brand"
+                FontSize="18"
+                x:Name="Brand"
+                ItemsSource="{Binding Brands}"
+                ItemDisplayBinding="{Binding Name}"
+                SelectedItem="{Binding SelectedBrand}"
+                />
+            <Picker
                 Title="Select Category"
                 FontSize="18"
                 x:Name="Category"

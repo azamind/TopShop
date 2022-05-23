@@ -7,11 +7,14 @@ namespace TopShopClient.ViewModels.Product
     {
         public ICommand PhotoUploadCommand { get; }
         public Category SelectedCategory { get; set; }
+        public Brand SelectedBrand { get; set; }
         public IList<Category> Categories { get; set; }
+        public IList<Brand> Brands { get; set; }
 
-        public CreateEditViewModel(IList<Category> categories)
+        public CreateEditViewModel(IList<Category> categories, IList<Brand> brands)
         {
             Categories = categories ?? throw new ArgumentNullException(nameof(categories));
+            Brands = brands ?? throw new ArgumentNullException(nameof(brands));
             PhotoUploadCommand = new Command(async () => await ExecutePhotoUploadCommand());
         }
 
