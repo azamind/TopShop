@@ -11,7 +11,7 @@ namespace TopShopServer.Controllers
         public CategoriesController(ICategoryRepository categoryRepository)
         {
             _categoryRepository = categoryRepository
-                 ?? throw new ArgumentNullException(nameof(categoryRepository)); ;
+                 ?? throw new ArgumentNullException(nameof(categoryRepository));
         }
 
         [HttpGet]
