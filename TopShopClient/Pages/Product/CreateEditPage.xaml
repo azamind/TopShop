@@ -50,10 +50,21 @@
                 x:Name="Description"
                 />
             <Label Text="Photo" FontSize="18"/>
+
             <Button
                 HorizontalOptions="Start"
                 Text="Choose Photo"
                 Command="{Binding PhotoUploadCommand}"
+                />
+            <Image
+                HorizontalOptions="Start"
+                HeightRequest="200"
+                WidthRequest="200"
+                Source="{Binding ProductPhoto}"
+                >
+            </Image>
+            <Label
+                Text="{Binding ProductPhotoName}"
                 />
             <Button
                 Margin="0, 10, 0, 0"

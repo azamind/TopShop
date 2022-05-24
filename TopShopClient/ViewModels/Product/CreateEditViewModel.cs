@@ -11,6 +11,27 @@ namespace TopShopClient.ViewModels.Product
         public IList<Category> Categories { get; set; }
         public IList<Brand> Brands { get; set; }
 
+        private ImageSource _productPhoto;
+        public ImageSource ProductPhoto { 
+            get => _productPhoto;
+            set
+            {
+                _productPhoto = value;
+                OnPropertyChanged("ProductPhoto");
+            }
+        }
+
+        private string _productPhotoName;
+        public string ProductPhotoName
+        {
+            get => _productPhotoName;
+            set
+            {
+                _productPhotoName = value;
+                OnPropertyChanged("ProductPhotoName");
+            }
+        }
+
         public CreateEditViewModel(IList<Category> categories, IList<Brand> brands)
         {
             Categories = categories ?? throw new ArgumentNullException(nameof(categories));
@@ -22,29 +43,16 @@ namespace TopShopClient.ViewModels.Product
         {
             try
             {
-                var FileType = new FilePickerFileType(new Dictionary<DevicePlatform, IEnumerable<string>>
-                {
-                    { DevicePlatform.iOS, new[] {"public.product.images"} },
-                    { DevicePlatform.Android, new[] {"product/images"} },
-                    { DevicePlatform.WinUI, new[] {".jpg", ".png"} },
-                    { DevicePlatform.Tizen, new[] {"*/*"} },
-                    { DevicePlatform.macOS, new[] {"jpg", "png"} },
-                });
-                var options = new PickOptions
-                {
-                    PickerTitle = "Please select a product file",
-                    FileTypes = FileType,
-                };
-                var result = await FilePicker.PickAsync(options);
+                var result = await FilePicker.Default.PickAsync(PickOptions.Default);
 
                 if(result != null)
                 {
-                    var Text = $"File Name: {result.FileName}";
-                    if(result.FileName.EndsWith("jpg", StringComparison.OrdinalIgnoreCase) ||
-                       result.FileName.EndsWith("jpg", StringComparison.OrdinalIgnoreCase))
+                    if (result.FileName.EndsWith("jpg", StringComparison.OrdinalIgnoreCase) ||
+                       result.FileName.EndsWith("png", StringComparison.OrdinalIgnoreCase))
                     {
                         var stream = await result.OpenReadAsync();
-                        var Image = ImageSource.FromStream(() => stream);
+                        ProductPhoto = ImageSource.FromStream(() => stream);
+                        ProductPhotoName = result.FileName;
                     }
 
                     return result;
