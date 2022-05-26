@@ -56,13 +56,44 @@
                 Text="Choose Photo"
                 Command="{Binding PhotoUploadCommand}"
                 />
-            <Image
+
+            <ListView
+              HasUnevenRows="True"
+              ItemsSource="{Binding ProductPhotos}" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image
+                                    Aspect="AspectFill"
+                                    Source="{Binding Path}"
+                                    HeightRequest="200"
+                                    WidthRequest="200"
+                                />
+                                
+                            </Grid>
+                            
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <!--<Image
                 HorizontalOptions="Start"
                 HeightRequest="200"
                 WidthRequest="200"
                 Source="{Binding ProductPhoto}"
                 >
-            </Image>
+            </Image> --> 
             <Label
                 Text="{Binding ProductPhotoName}"
                 />
