@@ -11,27 +11,6 @@ namespace TopShopClient.ViewModels.Product
         public IList<Category> Categories { get; set; }
         public IList<Brand> Brands { get; set; }
 
-        private ImageSource _productPhoto;
-        public ImageSource ProductPhoto { 
-            get => _productPhoto;
-            set
-            {
-                _productPhoto = value;
-                OnPropertyChanged("ProductPhoto");
-            }
-        }
-
-        private string _productPhotoName;
-        public string ProductPhotoName
-        {
-            get => _productPhotoName;
-            set
-            {
-                _productPhotoName = value;
-                OnPropertyChanged("ProductPhotoName");
-            }
-        }
-
         private List<ProductPhoto> _productPhotos;
         public List<ProductPhoto> ProductPhotos
         {
@@ -71,21 +50,6 @@ namespace TopShopClient.ViewModels.Product
                     }
                     ProductPhotos = (List<ProductPhoto>)uploadPhotos;
                 }
-                    /*var result = await FilePicker.Default.PickMultipleAsync(PickOptions.Default);
-
-                    if(result != null)
-                    {
-                        if (result.FileName.EndsWith("jpg", StringComparison.OrdinalIgnoreCase) ||
-                           result.FileName.EndsWith("png", StringComparison.OrdinalIgnoreCase))
-                        {
-                            var stream = await result.OpenReadAsync();
-                            ProductPhoto = ImageSource.FromStream(() => stream);
-                            ProductPhotoName = result.FileName;
-                        }
-
-                        return result;
-                    }*/
-
             } 
             catch (Exception e)
             {

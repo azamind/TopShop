@@ -57,43 +57,27 @@
                 Command="{Binding PhotoUploadCommand}"
                 />
 
-            <ListView
-              HasUnevenRows="True"
-              ItemsSource="{Binding ProductPhotos}" >
-                <ListView.ItemTemplate>
+            <CollectionView ItemsSource="{Binding ProductPhotos}"
+                ItemsLayout="HorizontalList">
+                <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            <Grid Padding="10">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="*" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-
-                                <Image
-                                    Aspect="AspectFill"
-                                    Source="{Binding Path}"
-                                    HeightRequest="200"
-                                    WidthRequest="200"
-                                />
-                                
-                            </Grid>
-                            
-                        </ViewCell>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="100" />
+                                <RowDefinition Height="100" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.RowSpan="2"
+                                Source="{Binding Path}"
+                                Aspect="AspectFill" />
+                        </Grid>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-
-            <!--<Image
-                HorizontalOptions="Start"
-                HeightRequest="200"
-                WidthRequest="200"
-                Source="{Binding ProductPhoto}"
-                >
-            </Image> --> 
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            
             <Label
                 Text="{Binding ProductPhotoName}"
                 />
