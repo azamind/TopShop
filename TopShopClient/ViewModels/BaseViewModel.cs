@@ -20,5 +20,10 @@ namespace TopShopClient.ViewModels
 
             changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public virtual void Initialize(object parameter)
+        {
+
+        }
     }
 }
