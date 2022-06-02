@@ -7,7 +7,7 @@ public partial class CreateEditPage : ContentPage
 {
     private CategoriesService _categoriesService = new CategoriesService();
     private BrandsService _brandsService = new BrandsService();
-    public Models.Product Product { get; set; }; 
+    public Models.Product Product { get; set; }
 
     public CreateEditPage()
 	{

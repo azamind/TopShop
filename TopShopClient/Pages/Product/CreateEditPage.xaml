@@ -11,17 +11,15 @@
             >
             <Label Text="Title" FontSize="18"/>
             <Entry
-                x:Name="Title"
                 ClearButtonVisibility="WhileEditing"
-                Text="{Binding Product.Title, Mode=TwoWay}"
+                Text="{Binding Title, Mode=TwoWay}"
                 />
             <Picker
                 Title="Select Brand"
                 FontSize="18"
-                x:Name="Brand"
                 ItemsSource="{Binding Brands}"
                 ItemDisplayBinding="{Binding Name}"
-                SelectedItem="{Binding SelectedBrand}"
+                SelectedIndex="{Binding SelectedBrandId}"
                 />
             <Picker
                 Title="Select Category"
@@ -29,26 +27,30 @@
                 x:Name="Category"
                 ItemsSource="{Binding Categories}"
                 ItemDisplayBinding="{Binding Name}"
-                SelectedItem="{Binding SelectedCategory}"
+                SelectedIndex="{Binding SelectedCategoryId}"
                 />
             <Label Text="Code" FontSize="18"/>
             <Entry
                 x:Name="Code"
                 ClearButtonVisibility="WhileEditing"
+                Text="{Binding Product.Code, Mode=TwoWay}"
                 />
             <Label Text="Article" FontSize="18"/>
             <Entry
                 x:Name="Article"
                 ClearButtonVisibility="WhileEditing"
+                Text="{Binding Product.Article, Mode=TwoWay}"
                 />
             <Label Text="Price" FontSize="18"/>
             <Entry
                 x:Name="Price"
+                Text="{Binding Product.Price, Mode=TwoWay}"
                 />
             <Label Text="Description" FontSize="18"/>
             <Editor
                 HeightRequest="100"
                 x:Name="Description"
+                Text="{Binding Product.Description, Mode=TwoWay}"
                 />
             <Label Text="Photo" FontSize="18"/>
 
@@ -80,7 +82,7 @@
             </CollectionView>
             
             <Button
-                Clicked="Button_Click"
+                Command="{Binding SaveCommand}"
                 Margin="0, 10, 0, 0"
                 Text="Send"
                 FontAttributes="Bold"

@@ -6,10 +6,9 @@ namespace TopShopClient.ViewModels.Product
 {
     public class CreateEditViewModel : BaseViewModel
     {
+        private ProductsService _productService = new ProductsService();
         public ICommand SaveCommand { get; set; }
         public ICommand PhotoUploadCommand { get; }
-        public Category SelectedCategory { get; set; }
-        public Brand SelectedBrand { get; set; }
         public IList<Category> Categories { get; set; }
         public IList<Brand> Brands { get; set; }
 
@@ -24,40 +23,135 @@ namespace TopShopClient.ViewModels.Product
             }
         }
 
-        private Models.Product _productData;
-
-        public Models.Product ProductData
+        public IList<string> _productPhotosNames;
+        public IList<string> ProductPhotosNames
         {
-            get => _productData;
+            get => _productPhotosNames;
             set
             {
-                _productData = value;
-                OnPropertyChanged(nameof(ProductData));
+                _productPhotosNames = value;
+                OnPropertyChanged("ProductPhotosNames");
             }
         }
 
-        private ProductsService _productService = new ProductsService();
+        public Models.Product Product { get; private set; }
+
+        public string Title
+        {
+            get => Product.Title;
+            set
+            {
+                if (Product.Title != value)
+                {
+                    Product.Title = value;
+                    OnPropertyChanged("Title");
+                }
+            }
+        }
+
+        public int? SelectedBrandId
+        {
+            get => null;
+            set
+            {
+                if(Product.BrandId != value)
+                {
+                    Product.BrandId = value;
+                    OnPropertyChanged("SelectedBrandId");
+                }
+            }
+        }
+
+        public int? SelectedCategoryId
+        {
+            get => null;
+            set
+            {
+                if (Product.CategoryId != value)
+                {
+                    Product.CategoryId = value;
+                    OnPropertyChanged("SelectedCategoryId");
+                }
+            }
+        }
+
+        public string Code
+        {
+            get => Product.Code;
+            set
+            {
+                if (Product.Code != value)
+                {
+                    Product.Code = value;
+                    OnPropertyChanged("Code");
+                }
+            }
+        }
+
+        public string Article
+        {
+            get => Product.Article;
+            set
+            {
+                if (Product.Article != value)
+                {
+                    Product.Article = value;
+                    OnPropertyChanged("Article");
+                }
+            }
+        }
+
+        public decimal? Price
+        {
+            get => Product.Price;
+            set
+            {
+                if (Product.Price != value)
+                {
+                    Product.Price = value;
+                    OnPropertyChanged("Price");
+                }
+            }
+        }
+
+        public string Description
+        {
+            get => Product.Description;
+            set
+            {
+                if (Product.Description != value)
+                {
+                    Product.Description = value;
+                    OnPropertyChanged("Description");
+                }
+            }
+        }
 
         public CreateEditViewModel(IList<Category> categories, IList<Brand> brands)
         {
+            Product = new Models.Product();
             Categories = categories ?? throw new ArgumentNullException(nameof(categories));
             Brands = brands ?? throw new ArgumentNullException(nameof(brands));
             PhotoUploadCommand = new Command(async () => await ExecutePhotoUploadCommand());
             SaveCommand = new Command(SaveProductDataCommand);
-            ProductData = new Models.Product();
-        }
-
-        public override void Initialize(object parameter)
-        {
-            if (parameter == null)
-                ProductData = new Models.Product();
-            else
-                ProductData = parameter as Models.Product;
-        }   
+        }  
 
         private async void SaveProductDataCommand()
         {
-            await _productService.AddProductAsync(ProductData);
+            Console.WriteLine(ProductPhotosNames);
+            
+            Models.Product ProductData = new Models.Product
+            {
+                Title = Product.Title,
+                BrandId = Product.BrandId,
+                CategoryId = Product.CategoryId,
+                Code = Product.Code,
+                Article = Product.Article,
+                Price = Product.Price,
+                Description = Product.Description,
+            };
+
+            //await _productService.AddProductAsync(ProductData);
         }
 
         private async Task<FileResult> ExecutePhotoUploadCommand()
@@ -70,6 +164,7 @@ namespace TopShopClient.ViewModels.Product
                     PickerTitle = "Select Product Photos"
                 });
 
+                var uploadPhotosNames = new List<string>();
                 var uploadPhotos = new List<ProductPhoto>();
                 if (results != null)
                 {
@@ -78,8 +173,10 @@ namespace TopShopClient.ViewModels.Product
                         var stream = await result.OpenReadAsync();
                         var path = ImageSource.FromStream(() => stream);
                         uploadPhotos.Add(new ProductPhoto { Path = path });
+                        uploadPhotosNames.Add(result.FileName);
                     }
-                    ProductPhotos = (List<ProductPhoto>)uploadPhotos;
+                    ProductPhotos = uploadPhotos;
+                    ProductPhotosNames = uploadPhotosNames;
                 }
             } 
             catch (Exception e)
@@ -90,4 +187,12 @@ namespace TopShopClient.ViewModels.Product
             return null;
         }
     }
+
+    /*public override void Initialize(object parameter)
+        {
+            if (parameter == null)
+                ProductData = new Models.Product();
+            else
+                ProductData = parameter as Models.Product;
+        }*/
 }
