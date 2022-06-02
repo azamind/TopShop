@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 using TopShopServer.DTOs;
 using TopShopServer.Models;
 using TopShopServer.Repositories.Product;
@@ -9,11 +9,14 @@ namespace TopShopServer.Controllers
 {
     public class ProductsController : BaseController
     {
+        private IWebHostEnvironment _environment;
         private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;
 
-        public ProductsController(IProductRepository productRepository, IMapper mapper)
+        public ProductsController(IProductRepository productRepository, IMapper mapper, IWebHostEnvironment environment)
         {
+            _environment = environment
+                ?? throw new ArgumentNullException(nameof(productRepository));
             _productRepository = productRepository 
                 ?? throw new ArgumentNullException(nameof(productRepository));
             _mapper = mapper 
@@ -47,10 +50,51 @@ namespace TopShopServer.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Product>> Create(Product product)
+        public async Task<ActionResult> Create([FromForm] Product product)
         {
-            await _productRepository.Create(product);
-            return Created("/", "Data successfully created.");
+            try
+            {
+                IList<string> fileNames = new List<string>();
+                var httpRequest = HttpContext.Request;
+
+                if (httpRequest.Form.Files.Count > 0)
+                {
+                    foreach (var file in httpRequest.Form.Files)
+                    {
+                        string Name = $"{DateTime.Now.ToFileTime()}" + "-" + file.FileName;
+                        var filePath = Path.Combine(_environment.ContentRootPath, "images");
+                        if (!Directory.Exists(filePath))
+                            Directory.CreateDirectory(filePath);    
+
+                        using (var memoryStream = new MemoryStream())
+                        {
+                            await file.CopyToAsync(memoryStream);
+                            System.IO.File.WriteAllBytes(Path.Combine(filePath, Name), memoryStream.ToArray());
+                        }
+
+                        fileNames.Add(Name);
+                    }
+                }
+
+                await _productRepository.Create(new Product
+                {
+                    BrandId = product.BrandId,
+                    CategoryId = product.CategoryId,
+                    Title = product.Title,
+                    Description = product.Description,
+                    Code = product.Code,
+                    Price = product.Price,
+                    Article = product.Article,
+                    Photo = JsonSerializer.Serialize(fileNames)
+                });
+
+                return Created("/", "Data successfully created.");
+            } 
+            catch (Exception e) 
+            {
+                return BadRequest(e.StackTrace);
+            }
+            
         }
 
         [HttpPut("{id}")]

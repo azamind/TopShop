@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /TopShopServer/topshop.db-shm
 /TopShopServer/topshop.db-wal
+/TopShopServer/images
