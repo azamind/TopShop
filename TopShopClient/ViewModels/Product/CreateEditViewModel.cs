@@ -6,14 +6,15 @@ namespace TopShopClient.ViewModels.Product
 {
     public class CreateEditViewModel : BaseViewModel
     {
+        public Models.Product Product { get; private set; }
         private ProductsService _productService = new ProductsService();
         public ICommand SaveCommand { get; set; }
         public ICommand PhotoUploadCommand { get; }
         public IList<Category> Categories { get; set; }
         public IList<Brand> Brands { get; set; }
 
-        private List<ProductPhoto> _productPhotos;
-        public List<ProductPhoto> ProductPhotos
+        private IList<ProductPhoto> _productPhotos;
+        public IList<ProductPhoto> ProductPhotos
         {
             get => _productPhotos;
             set
@@ -33,8 +34,6 @@ namespace TopShopClient.ViewModels.Product
                 OnPropertyChanged("ProductPhotosNames");
             }
         }
-
-        public Models.Product Product { get; private set; }
 
         public string Title
         {
@@ -138,8 +137,6 @@ namespace TopShopClient.ViewModels.Product
 
         private async void SaveProductDataCommand()
         {
-            Console.WriteLine(ProductPhotosNames);
-            
             Models.Product ProductData = new Models.Product
             {
                 Title = Product.Title,
@@ -151,7 +148,7 @@ namespace TopShopClient.ViewModels.Product
                 Description = Product.Description,
             };
 
-            //await _productService.AddProductAsync(ProductData);
+            await _productService.AddProductAsync(ProductData, ProductPhotos);
         }
 
         private async Task<FileResult> ExecutePhotoUploadCommand()
@@ -166,15 +163,18 @@ namespace TopShopClient.ViewModels.Product
 
                 var uploadPhotosNames = new List<string>();
                 var uploadPhotos = new List<ProductPhoto>();
+
                 if (results != null)
                 {
                     foreach(var result in results)
                     {
                         var stream = await result.OpenReadAsync();
+
                         var path = ImageSource.FromStream(() => stream);
                         uploadPhotos.Add(new ProductPhoto { Path = path });
                         uploadPhotosNames.Add(result.FileName);
                     }
+
                     ProductPhotos = uploadPhotos;
                     ProductPhotosNames = uploadPhotosNames;
                 }
@@ -188,11 +188,4 @@ namespace TopShopClient.ViewModels.Product
         }
     }
 
-    /*public override void Initialize(object parameter)
-        {
-            if (parameter == null)
-                ProductData = new Models.Product();
-            else
-                ProductData = parameter as Models.Product;
-        }*/
 }
