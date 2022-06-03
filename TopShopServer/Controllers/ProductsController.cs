@@ -16,7 +16,7 @@ namespace TopShopServer.Controllers
         public ProductsController(IProductRepository productRepository, IMapper mapper, IWebHostEnvironment environment)
         {
             _environment = environment
-                ?? throw new ArgumentNullException(nameof(productRepository));
+                ?? throw new ArgumentNullException(nameof(environment));
             _productRepository = productRepository 
                 ?? throw new ArgumentNullException(nameof(productRepository));
             _mapper = mapper 
