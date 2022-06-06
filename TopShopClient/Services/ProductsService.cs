@@ -10,10 +10,10 @@ namespace TopShopClient.Services
             MultipartFormDataContent multipartContent = new MultipartFormDataContent();
             multipartContent.Headers.ContentType.MediaType = "multipart/form-data";
 
-            foreach (ProductPhoto productPhoto in ProductPhotos)
+            /*foreach (ProductPhoto productPhoto in ProductPhotos)
             {
 
-            }
+            }*/
 
             multipartContent.Add(new StringContent(ProductData.Title), "Title");
             multipartContent.Add(new StringContent(Convert.ToString(ProductData.BrandId)), "BrandId");

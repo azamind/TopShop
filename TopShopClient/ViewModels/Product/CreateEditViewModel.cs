@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using NativeMedia;
+using System.Windows.Input;
 using TopShopClient.Models;
 using TopShopClient.Services;
 
@@ -126,12 +127,14 @@ namespace TopShopClient.ViewModels.Product
             }
         }
 
+        private IEnumerable<IMediaFile> _files;
+
         public CreateEditViewModel(IList<Category> categories, IList<Brand> brands)
         {
             Product = new Models.Product();
             Categories = categories ?? throw new ArgumentNullException(nameof(categories));
             Brands = brands ?? throw new ArgumentNullException(nameof(brands));
-            PhotoUploadCommand = new Command(async () => await ExecutePhotoUploadCommand());
+            PhotoUploadCommand = new Command(ExecutePhotoUploadCommand);
             SaveCommand = new Command(SaveProductDataCommand);
         }  
 
@@ -151,7 +154,7 @@ namespace TopShopClient.ViewModels.Product
             await _productService.AddProductAsync(ProductData, ProductPhotos);
         }
 
-        private async Task<FileResult> ExecutePhotoUploadCommand()
+        private async void ExecutePhotoUploadCommand()
         {
             try
             {
@@ -166,10 +169,9 @@ namespace TopShopClient.ViewModels.Product
 
                 if (results != null)
                 {
-                    foreach(var result in results)
+                    foreach (var result in results)
                     {
                         var stream = await result.OpenReadAsync();
-
                         var path = ImageSource.FromStream(() => stream);
                         uploadPhotos.Add(new ProductPhoto { Path = path });
                         uploadPhotosNames.Add(result.FileName);
@@ -178,13 +180,12 @@ namespace TopShopClient.ViewModels.Product
                     ProductPhotos = uploadPhotos;
                     ProductPhotosNames = uploadPhotosNames;
                 }
-            } 
+            }
             catch (Exception e)
             {
-
+                Console.WriteLine(e.Message);
             }
 
-            return null;
         }
     }
 
