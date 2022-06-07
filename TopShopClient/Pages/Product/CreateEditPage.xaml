@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TopShopClient.Pages.Product.CreateEditPage"
+             Title="CreateEditPage"
+             xmlns:vm="clr-namespace:TopShopClient.ViewModels.Product"
+             >
+    <ScrollView>
+        <StackLayout
+            Margin="20,0,20,0"
+            >
+            <Label Text="Title" FontSize="18"/>
+            <Entry
+                ClearButtonVisibility="WhileEditing"
+                Text="{Binding Title, Mode=TwoWay}"
+                />
+            <Picker
+                Title="Select Brand"
+                FontSize="18"
+                ItemsSource="{Binding Brands}"
+                ItemDisplayBinding="{Binding Name}"
+                SelectedIndex="{Binding SelectedBrandId}"
+                />
+            <Picker
+                Title="Select Category"
+                FontSize="18"
+                x:Name="Category"
+                ItemsSource="{Binding Categories}"
+                ItemDisplayBinding="{Binding Name}"
+                SelectedIndex="{Binding SelectedCategoryId}"
+                />
+            <Label Text="Code" FontSize="18"/>
+            <Entry
+                x:Name="Code"
+                ClearButtonVisibility="WhileEditing"
+                Text="{Binding Product.Code, Mode=TwoWay}"
+                />
+            <Label Text="Article" FontSize="18"/>
+            <Entry
+                x:Name="Article"
+                ClearButtonVisibility="WhileEditing"
+                Text="{Binding Product.Article, Mode=TwoWay}"
+                />
+            <Label Text="Price" FontSize="18"/>
+            <Entry
+                x:Name="Price"
+                Text="{Binding Product.Price, Mode=TwoWay}"
+                />
+            <Label Text="Description" FontSize="18"/>
+            <Editor
+                HeightRequest="100"
+                x:Name="Description"
+                Text="{Binding Product.Description, Mode=TwoWay}"
+                />
+            <Label Text="Photo" FontSize="18"/>
+
+            <Button
+                HorizontalOptions="Start"
+                Text="Choose Photo"
+                Command="{Binding PhotoUploadCommand}"
+                />
+
+            <Image Source="{Binding Path}" HorizontalOptions="Start" HeightRequest="250" WidthRequest="250" />
+
+            <!-- This collection need for multiple image display (implement letter)
+            
+            <CollectionView ItemsSource="{Binding ProductPhotos}"
+                ItemsLayout="HorizontalList">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="100" />
+                                <RowDefinition Height="100" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.RowSpan="2"
+                                Source="{Binding Path}"
+                                Aspect="AspectFill" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>-->
+            
+            <Button
+                Command="{Binding SaveCommand}"
+                Margin="0, 10, 0, 0"
+                Text="Send"
+                FontAttributes="Bold"
+                FontSize="20"
+                HorizontalOptions="StartAndExpand"
+                />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
