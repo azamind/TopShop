@@ -4,6 +4,7 @@ using System.Text.Json;
 using TopShopServer.DTOs;
 using TopShopServer.Models;
 using TopShopServer.Repositories.Product;
+using TopShopServer.Services;
 
 namespace TopShopServer.Controllers
 {
@@ -12,8 +13,14 @@ namespace TopShopServer.Controllers
         private IWebHostEnvironment _environment;
         private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;
+        private readonly ProductService _productService;
 
-        public ProductsController(IProductRepository productRepository, IMapper mapper, IWebHostEnvironment environment)
+        public ProductsController(
+            IProductRepository productRepository, 
+            IMapper mapper, 
+            IWebHostEnvironment environment,
+            ProductService productService
+            )
         {
             _environment = environment
                 ?? throw new ArgumentNullException(nameof(environment));
@@ -21,6 +28,8 @@ namespace TopShopServer.Controllers
                 ?? throw new ArgumentNullException(nameof(productRepository));
             _mapper = mapper 
                 ?? throw new ArgumentNullException(nameof(mapper));
+            _productService = productService
+                ?? throw new ArgumentNullException(nameof(productService));
         }
 
         [HttpGet]
@@ -54,7 +63,7 @@ namespace TopShopServer.Controllers
         {
             try
             {
-                IList<string> fileNames = new List<string>();
+                /*IList<string> fileNames = new List<string>();
                 var httpRequest = HttpContext.Request;
 
                 if (httpRequest.Form.Files.Count > 0)
@@ -74,7 +83,7 @@ namespace TopShopServer.Controllers
 
                         fileNames.Add(Name);
                     }
-                }
+                }*/
 
                 await _productRepository.Create(new Product
                 {
@@ -85,7 +94,7 @@ namespace TopShopServer.Controllers
                     Code = product.Code,
                     Price = product.Price,
                     Article = product.Article,
-                    Photo = JsonSerializer.Serialize(fileNames)
+                    Photo = product.Photo
                 });
 
                 return Created("/", "Data successfully created.");
@@ -102,6 +111,34 @@ namespace TopShopServer.Controllers
         {
             await _productRepository.Update(id, product);
             return NoContent();
+        }
+
+        [HttpPost("images")]
+        public async Task<ActionResult<IList<string>>> PhotosUpload()
+        {
+            IList<string> fileNames = new List<string>();
+            var httpRequest = HttpContext.Request;
+
+            if (httpRequest.Form.Files.Count > 0)
+            {
+                foreach (var file in httpRequest.Form.Files)
+                {
+                    string Name = $"{DateTime.Now.ToFileTime()}" + "-" + file.FileName;
+                    var filePath = Path.Combine(_environment.ContentRootPath, "images");
+                    if (!Directory.Exists(filePath))
+                        Directory.CreateDirectory(filePath);
+
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await file.CopyToAsync(memoryStream);
+                        System.IO.File.WriteAllBytes(Path.Combine(filePath, Name), memoryStream.ToArray());
+                    }
+
+                    fileNames.Add(Name);
+                }
+            }
+
+            return Ok(fileNames);
         }
 
     }
