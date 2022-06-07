@@ -8,7 +8,7 @@ namespace TopShopClient.Services
         public async Task<List<Category>> GetCategoriesAsync()
         {
             var url = new Uri(domainUrl + "/api/v1/categories");
-            HttpResponseMessage response = await _httpClient.GetAsync(url);
+            HttpResponseMessage response = await httpClient.GetAsync(url);
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();

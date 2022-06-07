@@ -13,13 +13,11 @@ namespace TopShopServer.Controllers
         private IWebHostEnvironment _environment;
         private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;
-        private readonly ProductService _productService;
 
         public ProductsController(
             IProductRepository productRepository, 
             IMapper mapper, 
-            IWebHostEnvironment environment,
-            ProductService productService
+            IWebHostEnvironment environment
             )
         {
             _environment = environment
@@ -28,8 +26,6 @@ namespace TopShopServer.Controllers
                 ?? throw new ArgumentNullException(nameof(productRepository));
             _mapper = mapper 
                 ?? throw new ArgumentNullException(nameof(mapper));
-            _productService = productService
-                ?? throw new ArgumentNullException(nameof(productService));
         }
 
         [HttpGet]

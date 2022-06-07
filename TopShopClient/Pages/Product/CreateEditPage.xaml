@@ -60,6 +60,10 @@
                 Command="{Binding PhotoUploadCommand}"
                 />
 
+            <Image Source="{Binding Path}" HorizontalOptions="Start" HeightRequest="250" WidthRequest="250" />
+
+            <!-- This collection need for multiple image display (implement letter)
+            
             <CollectionView ItemsSource="{Binding ProductPhotos}"
                 ItemsLayout="HorizontalList">
                 <CollectionView.ItemTemplate>
@@ -79,7 +83,7 @@
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
-            </CollectionView>
+            </CollectionView>-->
             
             <Button
                 Command="{Binding SaveCommand}"

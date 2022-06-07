@@ -1,4 +1,5 @@
 ﻿using NativeMedia;
+using System.Text.Json;
 using System.Windows.Input;
 using TopShopClient.Models;
 using TopShopClient.Services;
@@ -25,14 +26,14 @@ namespace TopShopClient.ViewModels.Product
             }
         }
 
-        public IList<string> _productPhotosNames;
-        public IList<string> ProductPhotosNames
+        public string _productPhotoName;
+        public string ProductPhotoName
         {
-            get => _productPhotosNames;
+            get => _productPhotoName;
             set
             {
-                _productPhotosNames = value;
-                OnPropertyChanged("ProductPhotosNames");
+                _productPhotoName = value;
+                OnPropertyChanged("ProductPhotoName");
             }
         }
 
@@ -127,7 +128,16 @@ namespace TopShopClient.ViewModels.Product
             }
         }
 
-        private IEnumerable<IMediaFile> _files;
+        public ImageSource _path;
+        public ImageSource Path
+        {
+            get => _path;
+            set
+            {
+                _path = value;
+                OnPropertyChanged("Path");
+            }
+        }
 
         public CreateEditViewModel(IList<Category> categories, IList<Brand> brands)
         {
@@ -151,34 +161,35 @@ namespace TopShopClient.ViewModels.Product
                 Description = Product.Description,
             };
 
-            await _productService.AddProductAsync(ProductData, ProductPhotos);
+            await _productService.AddProductAsync(ProductData, ProductPhotoName);
+
+            await Shell.Current.GoToAsync("..");
         }
 
         private async void ExecutePhotoUploadCommand()
         {
             try
             {
-                var results = await FilePicker.PickMultipleAsync(new PickOptions
+                var result = await FilePicker.PickAsync(new PickOptions
                 {
                     FileTypes = FilePickerFileType.Images,
                     PickerTitle = "Select Product Photos"
                 });
 
-                var uploadPhotosNames = new List<string>();
-                var uploadPhotos = new List<ProductPhoto>();
 
-                if (results != null)
+                if (result != null)
                 {
-                    foreach (var result in results)
-                    {
-                        var stream = await result.OpenReadAsync();
-                        var path = ImageSource.FromStream(() => stream);
-                        uploadPhotos.Add(new ProductPhoto { Path = path });
-                        uploadPhotosNames.Add(result.FileName);
-                    }
+                    var content = new MultipartFormDataContent();
 
-                    ProductPhotos = uploadPhotos;
-                    ProductPhotosNames = uploadPhotosNames;
+                    content.Add(new StreamContent(await result.OpenReadAsync()), "file", result.FileName);
+
+                    var url = new Uri(_productService.domainUrl + "/api/v1/products/images");
+                    var response = await _productService.httpClient.PostAsync(url, content);
+
+                    ProductPhotoName = JsonSerializer.Deserialize<IEnumerable<string>>(response.Content.ReadAsStringAsync().Result).First();
+
+                    var stream = await result.OpenReadAsync();
+                    Path = ImageSource.FromStream(() => stream);
                 }
             }
             catch (Exception e)
