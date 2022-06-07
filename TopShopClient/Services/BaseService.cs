@@ -2,8 +2,8 @@
 {
     public class BaseService
     {
-        public readonly HttpClient httpClient;
-        public readonly string domainUrl = "https://localhost:7251";
+        protected readonly HttpClient httpClient;
+        protected readonly string domainUrl = "https://localhost:7251";
 
         public BaseService()
         {

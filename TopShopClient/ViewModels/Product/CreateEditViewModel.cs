@@ -170,26 +170,14 @@ namespace TopShopClient.ViewModels.Product
         {
             try
             {
-                var result = await FilePicker.PickAsync(new PickOptions
-                {
-                    FileTypes = FilePickerFileType.Images,
-                    PickerTitle = "Select Product Photos"
-                });
-
+                PickOptions options = new PickOptions { FileTypes = FilePickerFileType.Images, PickerTitle = "Select Product Photos"};
+                FileResult result = await FilePicker.PickAsync(options);
 
                 if (result != null)
                 {
-                    var content = new MultipartFormDataContent();
-
-                    content.Add(new StreamContent(await result.OpenReadAsync()), "file", result.FileName);
-
-                    var url = new Uri(_productService.domainUrl + "/api/v1/products/images");
-                    var response = await _productService.httpClient.PostAsync(url, content);
-
-                    ProductPhotoName = JsonSerializer.Deserialize<IEnumerable<string>>(response.Content.ReadAsStringAsync().Result).First();
-
                     var stream = await result.OpenReadAsync();
                     Path = ImageSource.FromStream(() => stream);
+                    ProductPhotoName = await _productService.UploadPhoto(result);
                 }
             }
             catch (Exception e)

@@ -8,10 +8,8 @@ namespace TopShopClient.Services
 
         public async Task AddProductAsync(Product ProductData, string ProductPhotoName)
         {
-
             MultipartFormDataContent multipartContent = new MultipartFormDataContent();
             multipartContent.Headers.ContentType.MediaType = "multipart/form-data";
-
             multipartContent.Add(new StringContent(ProductData.Title), "Title");
             multipartContent.Add(new StringContent(Convert.ToString(ProductData.BrandId)), "BrandId");
             multipartContent.Add(new StringContent(Convert.ToString(ProductData.CategoryId)), "CategoryId");
@@ -23,6 +21,17 @@ namespace TopShopClient.Services
 
             var url = new Uri(domainUrl + "/api/v1/products");
             await httpClient.PostAsync(url, multipartContent);
+        }
+
+        public async Task<string> UploadPhoto(FileResult result)
+        {
+            var content = new MultipartFormDataContent();
+
+            content.Add(new StreamContent(await result.OpenReadAsync()), "file", result.FileName);
+
+            var url = new Uri(domainUrl + "/api/v1/products/images");
+            var response = await httpClient.PostAsync(url, content);
+            return JsonSerializer.Deserialize<IEnumerable<string>>(response.Content.ReadAsStringAsync().Result).First();
         }
 
     }
