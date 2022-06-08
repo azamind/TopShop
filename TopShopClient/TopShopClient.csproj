@@ -48,4 +48,24 @@
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+	  <PackageReference Include="Xamarin.MediaGallery" Version="2.1.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Pages\Product\CreateEditPage.xaml.cs">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </Compile>
+	  <Compile Update="ViewModels\Product\CreateEditViewModel.cs">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Pages\Product\CreateEditPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>

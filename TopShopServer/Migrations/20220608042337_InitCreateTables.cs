@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TopShopServer.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitCreateTables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -78,7 +78,8 @@ namespace TopShopServer.Migrations
                     Article = table.Column<string>(type: "TEXT", nullable: false),
                     Code = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: false),
-                    Photo = table.Column<string>(type: "jsonb", nullable: false),
+                    ShortDescription = table.Column<string>(type: "TEXT", nullable: false),
+                    Photo = table.Column<string>(type: "TEXT", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
@@ -101,77 +102,77 @@ namespace TopShopServer.Migrations
             migrationBuilder.InsertData(
                 table: "Brands",
                 columns: new[] { "Id", "CreatedAt", "Name" },
-                values: new object[] { 1, new DateTime(2022, 5, 13, 17, 36, 18, 330, DateTimeKind.Local).AddTicks(6127), "Nike" });
+                values: new object[] { 1, new DateTime(2022, 6, 8, 7, 23, 37, 221, DateTimeKind.Local).AddTicks(6178), "Nike" });
 
             migrationBuilder.InsertData(
                 table: "Brands",
                 columns: new[] { "Id", "CreatedAt", "Name" },
-                values: new object[] { 2, new DateTime(2022, 5, 13, 17, 36, 18, 330, DateTimeKind.Local).AddTicks(6135), "Adidas" });
+                values: new object[] { 2, new DateTime(2022, 6, 8, 7, 23, 37, 221, DateTimeKind.Local).AddTicks(6188), "Adidas" });
 
             migrationBuilder.InsertData(
                 table: "Brands",
                 columns: new[] { "Id", "CreatedAt", "Name" },
-                values: new object[] { 3, new DateTime(2022, 5, 13, 17, 36, 18, 330, DateTimeKind.Local).AddTicks(6136), "Puma" });
+                values: new object[] { 3, new DateTime(2022, 6, 8, 7, 23, 37, 221, DateTimeKind.Local).AddTicks(6189), "Puma" });
 
             migrationBuilder.InsertData(
                 table: "Brands",
                 columns: new[] { "Id", "CreatedAt", "Name" },
-                values: new object[] { 4, new DateTime(2022, 5, 13, 17, 36, 18, 330, DateTimeKind.Local).AddTicks(6136), "Peacful Hooligan" });
+                values: new object[] { 4, new DateTime(2022, 6, 8, 7, 23, 37, 221, DateTimeKind.Local).AddTicks(6190), "Peacful Hooligan" });
 
             migrationBuilder.InsertData(
                 table: "Brands",
                 columns: new[] { "Id", "CreatedAt", "Name" },
-                values: new object[] { 5, new DateTime(2022, 5, 13, 17, 36, 18, 330, DateTimeKind.Local).AddTicks(6137), "The North Face" });
+                values: new object[] { 5, new DateTime(2022, 6, 8, 7, 23, 37, 221, DateTimeKind.Local).AddTicks(6191), "The North Face" });
 
             migrationBuilder.InsertData(
                 table: "Brands",
                 columns: new[] { "Id", "CreatedAt", "Name" },
-                values: new object[] { 6, new DateTime(2022, 5, 13, 17, 36, 18, 330, DateTimeKind.Local).AddTicks(6137), "Alpha Industries" });
+                values: new object[] { 6, new DateTime(2022, 6, 8, 7, 23, 37, 221, DateTimeKind.Local).AddTicks(6191), "Alpha Industries" });
 
             migrationBuilder.InsertData(
                 table: "Brands",
                 columns: new[] { "Id", "CreatedAt", "Name" },
-                values: new object[] { 7, new DateTime(2022, 5, 13, 17, 36, 18, 330, DateTimeKind.Local).AddTicks(6138), "Stone Island" });
+                values: new object[] { 7, new DateTime(2022, 6, 8, 7, 23, 37, 221, DateTimeKind.Local).AddTicks(6192), "Stone Island" });
 
             migrationBuilder.InsertData(
                 table: "Brands",
                 columns: new[] { "Id", "CreatedAt", "Name" },
-                values: new object[] { 8, new DateTime(2022, 5, 13, 17, 36, 18, 330, DateTimeKind.Local).AddTicks(6138), "Polo Ralph Lauren" });
+                values: new object[] { 8, new DateTime(2022, 6, 8, 7, 23, 37, 221, DateTimeKind.Local).AddTicks(6193), "Polo Ralph Lauren" });
 
             migrationBuilder.InsertData(
                 table: "Brands",
                 columns: new[] { "Id", "CreatedAt", "Name" },
-                values: new object[] { 9, new DateTime(2022, 5, 13, 17, 36, 18, 330, DateTimeKind.Local).AddTicks(6139), "Tommy Jeans" });
+                values: new object[] { 9, new DateTime(2022, 6, 8, 7, 23, 37, 221, DateTimeKind.Local).AddTicks(6194), "Tommy Jeans" });
 
             migrationBuilder.InsertData(
                 table: "Brands",
                 columns: new[] { "Id", "CreatedAt", "Name" },
-                values: new object[] { 10, new DateTime(2022, 5, 13, 17, 36, 18, 330, DateTimeKind.Local).AddTicks(6139), "thisisneverthat" });
+                values: new object[] { 10, new DateTime(2022, 6, 8, 7, 23, 37, 221, DateTimeKind.Local).AddTicks(6195), "thisisneverthat" });
 
             migrationBuilder.InsertData(
                 table: "Categories",
                 columns: new[] { "Id", "CreatedAt", "Name", "ParentId" },
-                values: new object[] { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sneakers", null });
+                values: new object[] { 1, new DateTime(2022, 6, 8, 7, 23, 37, 221, DateTimeKind.Local).AddTicks(6296), "Sneakers", null });
 
             migrationBuilder.InsertData(
                 table: "Categories",
                 columns: new[] { "Id", "CreatedAt", "Name", "ParentId" },
-                values: new object[] { 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Hoodies", null });
+                values: new object[] { 2, new DateTime(2022, 6, 8, 7, 23, 37, 221, DateTimeKind.Local).AddTicks(6298), "Hoodies", null });
 
             migrationBuilder.InsertData(
                 table: "Categories",
                 columns: new[] { "Id", "CreatedAt", "Name", "ParentId" },
-                values: new object[] { 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "T-shirt", null });
+                values: new object[] { 3, new DateTime(2022, 6, 8, 7, 23, 37, 221, DateTimeKind.Local).AddTicks(6299), "T-shirt", null });
 
             migrationBuilder.InsertData(
                 table: "Categories",
                 columns: new[] { "Id", "CreatedAt", "Name", "ParentId" },
-                values: new object[] { 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Jackets", null });
+                values: new object[] { 4, new DateTime(2022, 6, 8, 7, 23, 37, 221, DateTimeKind.Local).AddTicks(6300), "Jackets", null });
 
             migrationBuilder.InsertData(
                 table: "Categories",
                 columns: new[] { "Id", "CreatedAt", "Name", "ParentId" },
-                values: new object[] { 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Jeans", null });
+                values: new object[] { 5, new DateTime(2022, 6, 8, 7, 23, 37, 221, DateTimeKind.Local).AddTicks(6301), "Jeans", null });
 
             migrationBuilder.InsertData(
                 table: "ProductSizes",
@@ -225,8 +226,8 @@ namespace TopShopServer.Migrations
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "Id", "Article", "BrandId", "CategoryId", "Code", "CreatedAt", "Description", "Photo", "Price", "Title" },
-                values: new object[] { 1, "20943", 1, 1, "332-847", new DateTime(2022, 5, 13, 17, 36, 18, 330, DateTimeKind.Local).AddTicks(6294), "Nike its a best brand in sneakers category", "some.jpg", 124.55m, "ACG Air Mada" });
+                columns: new[] { "Id", "Article", "BrandId", "CategoryId", "Code", "CreatedAt", "Description", "Photo", "Price", "ShortDescription", "Title" },
+                values: new object[] { 1, "20943", 1, 1, "332-847", new DateTime(2022, 6, 8, 7, 23, 37, 221, DateTimeKind.Local).AddTicks(6340), "Nike its a best brand in sneakers category. Made in Chinee. Subcategory: ACG. Loops at heel and tongue", "some.jpg", 124.55m, "White color, flexible, under, waterproof", "ACG Air Mada" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_BrandId",

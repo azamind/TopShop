@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/TopShopServer/topshop.db-shm
+/TopShopServer/topshop.db-wal
+/TopShopServer/images
