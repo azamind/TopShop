@@ -19,7 +19,7 @@
                 FontSize="18"
                 ItemsSource="{Binding Brands}"
                 ItemDisplayBinding="{Binding Name}"
-                SelectedIndex="{Binding SelectedBrandId}"
+                SelectedItem="{Binding SelectedBrand}"
                 />
             <Picker
                 Title="Select Category"
@@ -27,7 +27,7 @@
                 x:Name="Category"
                 ItemsSource="{Binding Categories}"
                 ItemDisplayBinding="{Binding Name}"
-                SelectedIndex="{Binding SelectedCategoryId}"
+                SelectedItem="{Binding SelectedCategory}"
                 />
             <Label Text="Code" FontSize="18"/>
             <Entry
@@ -46,14 +46,20 @@
                 x:Name="Price"
                 Text="{Binding Product.Price, Mode=TwoWay}"
                 />
+            <Label Text="Short Description" FontSize="18"/>
+            <Editor
+                HeightRequest="50"
+                x:Name="ShortDescription"
+                Text="{Binding Product.ShortDescription, Mode=TwoWay}"
+                />
             <Label Text="Description" FontSize="18"/>
             <Editor
                 HeightRequest="100"
                 x:Name="Description"
                 Text="{Binding Product.Description, Mode=TwoWay}"
                 />
+            
             <Label Text="Photo" FontSize="18"/>
-
             <Button
                 HorizontalOptions="Start"
                 Text="Choose Photo"
