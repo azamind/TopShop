@@ -10,6 +10,7 @@
         public string? Article { get; set; }
         public string? Code { get; set; }
         public string? Description { get; set; }
+        public string? ShortDescription { get; set; }
         public string? Photo { get; set; }
         public DateTime? CreatedAt { get; set; } = DateTime.Now;
     }
