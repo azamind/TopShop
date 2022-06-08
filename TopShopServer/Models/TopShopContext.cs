@@ -170,7 +170,8 @@ namespace TopShopServer.Models
                         Price = (decimal?)124.55,
                         Article = "20943",
                         Code = "332-847",
-                        Description = "Nike its a best brand in sneakers category",
+                        Description = "Nike its a best brand in sneakers category. Made in Chinee. Subcategory: ACG. Loops at heel and tongue",
+                        ShortDescription = "White color, flexible, under, waterproof",
                         Photo = "some.jpg",
                         CreatedAt = DateTime.Now
                     }

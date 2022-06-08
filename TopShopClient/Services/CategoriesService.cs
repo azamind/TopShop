@@ -14,7 +14,7 @@ namespace TopShopClient.Services
                 var content = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<List<Category>>(content);
             }
-            return null;
+            return new List<Category>();
         }
 
     }

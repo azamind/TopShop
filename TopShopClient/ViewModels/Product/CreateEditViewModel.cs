@@ -1,6 +1,4 @@
-﻿using NativeMedia;
-using System.Text.Json;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using TopShopClient.Models;
 using TopShopClient.Services;
 
@@ -14,6 +12,8 @@ namespace TopShopClient.ViewModels.Product
         public ICommand PhotoUploadCommand { get; }
         public IList<Category> Categories { get; set; }
         public IList<Brand> Brands { get; set; }
+        public Brand SelectedBrand { get; set; }
+        public Category SelectedCategory { get; set; }
 
         private IList<ProductPhoto> _productPhotos;
         public IList<ProductPhoto> ProductPhotos
@@ -37,6 +37,17 @@ namespace TopShopClient.ViewModels.Product
             }
         }
 
+        public ImageSource _path;
+        public ImageSource Path
+        {
+            get => _path;
+            set
+            {
+                _path = value;
+                OnPropertyChanged("Path");
+            }
+        }
+
         public string Title
         {
             get => Product.Title;
@@ -46,32 +57,6 @@ namespace TopShopClient.ViewModels.Product
                 {
                     Product.Title = value;
                     OnPropertyChanged("Title");
-                }
-            }
-        }
-
-        public int? SelectedBrandId
-        {
-            get => null;
-            set
-            {
-                if(Product.BrandId != value)
-                {
-                    Product.BrandId = value;
-                    OnPropertyChanged("SelectedBrandId");
-                }
-            }
-        }
-
-        public int? SelectedCategoryId
-        {
-            get => null;
-            set
-            {
-                if (Product.CategoryId != value)
-                {
-                    Product.CategoryId = value;
-                    OnPropertyChanged("SelectedCategoryId");
                 }
             }
         }
@@ -128,14 +113,16 @@ namespace TopShopClient.ViewModels.Product
             }
         }
 
-        public ImageSource _path;
-        public ImageSource Path
+        public string ShortDescription
         {
-            get => _path;
+            get => Product.ShortDescription;
             set
             {
-                _path = value;
-                OnPropertyChanged("Path");
+                if (Product.ShortDescription != value)
+                {
+                    Product.ShortDescription = value;
+                    OnPropertyChanged("ShortDescription");
+                }
             }
         }
 
@@ -153,12 +140,13 @@ namespace TopShopClient.ViewModels.Product
             Models.Product ProductData = new Models.Product
             {
                 Title = Product.Title,
-                BrandId = Product.BrandId,
-                CategoryId = Product.CategoryId,
+                BrandId = SelectedBrand.Id,
+                CategoryId = SelectedCategory.Id,
                 Code = Product.Code,
                 Article = Product.Article,
                 Price = Product.Price,
                 Description = Product.Description,
+                ShortDescription = Product.ShortDescription,
             };
 
             await _productService.AddProductAsync(ProductData, ProductPhotoName);
