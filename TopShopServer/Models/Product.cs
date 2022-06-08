@@ -24,6 +24,8 @@ namespace TopShopServer.Models
         public string? Code { get; set; }
         [Required]
         public string? Description { get; set; }
+        [Required]
+        public string? ShortDescription { get; set; }
         public string? Photo { get; set; }
         public DateTime? CreatedAt { get; set; } = DateTime.Now;
     }

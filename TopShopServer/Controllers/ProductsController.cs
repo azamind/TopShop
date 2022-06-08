@@ -87,6 +87,7 @@ namespace TopShopServer.Controllers
                     CategoryId = product.CategoryId,
                     Title = product.Title,
                     Description = product.Description,
+                    ShortDescription = product.ShortDescription,
                     Code = product.Code,
                     Price = product.Price,
                     Article = product.Article,
