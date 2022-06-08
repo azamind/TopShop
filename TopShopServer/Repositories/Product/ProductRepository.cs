@@ -43,6 +43,7 @@ namespace TopShopServer.Repositories.Product
             entity.Article = product.Article;
             entity.Code = product.Code;
             entity.Description = product.Description;
+            entity.ShortDescription = product.ShortDescription;
             entity.Photo = product.Photo;
             await _context.SaveChangesAsync();
         }

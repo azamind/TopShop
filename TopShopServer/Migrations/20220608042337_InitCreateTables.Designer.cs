@@ -11,8 +11,8 @@ using TopShopServer.Models;
 namespace TopShopServer.Migrations
 {
     [DbContext(typeof(TopShopContext))]
-    [Migration("20220513144054_AddDateTime")]
-    partial class AddDateTime
+    [Migration("20220608042337_InitCreateTables")]
+    partial class InitCreateTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -41,61 +41,61 @@ namespace TopShopServer.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2022, 5, 13, 17, 40, 53, 879, DateTimeKind.Local).AddTicks(2504),
+                            CreatedAt = new DateTime(2022, 6, 8, 7, 23, 37, 221, DateTimeKind.Local).AddTicks(6178),
                             Name = "Nike"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2022, 5, 13, 17, 40, 53, 879, DateTimeKind.Local).AddTicks(2512),
+                            CreatedAt = new DateTime(2022, 6, 8, 7, 23, 37, 221, DateTimeKind.Local).AddTicks(6188),
                             Name = "Adidas"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2022, 5, 13, 17, 40, 53, 879, DateTimeKind.Local).AddTicks(2512),
+                            CreatedAt = new DateTime(2022, 6, 8, 7, 23, 37, 221, DateTimeKind.Local).AddTicks(6189),
                             Name = "Puma"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2022, 5, 13, 17, 40, 53, 879, DateTimeKind.Local).AddTicks(2513),
+                            CreatedAt = new DateTime(2022, 6, 8, 7, 23, 37, 221, DateTimeKind.Local).AddTicks(6190),
                             Name = "Peacful Hooligan"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2022, 5, 13, 17, 40, 53, 879, DateTimeKind.Local).AddTicks(2514),
+                            CreatedAt = new DateTime(2022, 6, 8, 7, 23, 37, 221, DateTimeKind.Local).AddTicks(6191),
                             Name = "The North Face"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTime(2022, 5, 13, 17, 40, 53, 879, DateTimeKind.Local).AddTicks(2514),
+                            CreatedAt = new DateTime(2022, 6, 8, 7, 23, 37, 221, DateTimeKind.Local).AddTicks(6191),
                             Name = "Alpha Industries"
                         },
                         new
                         {
                             Id = 7,
-                            CreatedAt = new DateTime(2022, 5, 13, 17, 40, 53, 879, DateTimeKind.Local).AddTicks(2515),
+                            CreatedAt = new DateTime(2022, 6, 8, 7, 23, 37, 221, DateTimeKind.Local).AddTicks(6192),
                             Name = "Stone Island"
                         },
                         new
                         {
                             Id = 8,
-                            CreatedAt = new DateTime(2022, 5, 13, 17, 40, 53, 879, DateTimeKind.Local).AddTicks(2515),
+                            CreatedAt = new DateTime(2022, 6, 8, 7, 23, 37, 221, DateTimeKind.Local).AddTicks(6193),
                             Name = "Polo Ralph Lauren"
                         },
                         new
                         {
                             Id = 9,
-                            CreatedAt = new DateTime(2022, 5, 13, 17, 40, 53, 879, DateTimeKind.Local).AddTicks(2516),
+                            CreatedAt = new DateTime(2022, 6, 8, 7, 23, 37, 221, DateTimeKind.Local).AddTicks(6194),
                             Name = "Tommy Jeans"
                         },
                         new
                         {
                             Id = 10,
-                            CreatedAt = new DateTime(2022, 5, 13, 17, 40, 53, 879, DateTimeKind.Local).AddTicks(2516),
+                            CreatedAt = new DateTime(2022, 6, 8, 7, 23, 37, 221, DateTimeKind.Local).AddTicks(6195),
                             Name = "thisisneverthat"
                         });
                 });
@@ -125,31 +125,31 @@ namespace TopShopServer.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2022, 5, 13, 17, 40, 53, 879, DateTimeKind.Local).AddTicks(2607),
+                            CreatedAt = new DateTime(2022, 6, 8, 7, 23, 37, 221, DateTimeKind.Local).AddTicks(6296),
                             Name = "Sneakers"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2022, 5, 13, 17, 40, 53, 879, DateTimeKind.Local).AddTicks(2608),
+                            CreatedAt = new DateTime(2022, 6, 8, 7, 23, 37, 221, DateTimeKind.Local).AddTicks(6298),
                             Name = "Hoodies"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2022, 5, 13, 17, 40, 53, 879, DateTimeKind.Local).AddTicks(2609),
+                            CreatedAt = new DateTime(2022, 6, 8, 7, 23, 37, 221, DateTimeKind.Local).AddTicks(6299),
                             Name = "T-shirt"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2022, 5, 13, 17, 40, 53, 879, DateTimeKind.Local).AddTicks(2610),
+                            CreatedAt = new DateTime(2022, 6, 8, 7, 23, 37, 221, DateTimeKind.Local).AddTicks(6300),
                             Name = "Jackets"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2022, 5, 13, 17, 40, 53, 879, DateTimeKind.Local).AddTicks(2610),
+                            CreatedAt = new DateTime(2022, 6, 8, 7, 23, 37, 221, DateTimeKind.Local).AddTicks(6301),
                             Name = "Jeans"
                         });
                 });
@@ -182,12 +182,15 @@ namespace TopShopServer.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Photo")
-                        .IsRequired()
-                        .HasColumnType("jsonb");
+                        .HasColumnType("TEXT");
 
                     b.Property<decimal?>("Price")
                         .IsRequired()
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ShortDescription")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -210,10 +213,11 @@ namespace TopShopServer.Migrations
                             BrandId = 1,
                             CategoryId = 1,
                             Code = "332-847",
-                            CreatedAt = new DateTime(2022, 5, 13, 17, 40, 53, 879, DateTimeKind.Local).AddTicks(2638),
-                            Description = "Nike its a best brand in sneakers category",
+                            CreatedAt = new DateTime(2022, 6, 8, 7, 23, 37, 221, DateTimeKind.Local).AddTicks(6340),
+                            Description = "Nike its a best brand in sneakers category. Made in Chinee. Subcategory: ACG. Loops at heel and tongue",
                             Photo = "some.jpg",
                             Price = 124.55m,
+                            ShortDescription = "White color, flexible, under, waterproof",
                             Title = "ACG Air Mada"
                         });
                 });
