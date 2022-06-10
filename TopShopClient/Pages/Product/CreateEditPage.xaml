@@ -5,6 +5,24 @@
              Title="CreateEditPage"
              xmlns:vm="clr-namespace:TopShopClient.ViewModels.Product"
              >
+
+    <ContentPage.Resources>
+        <Style TargetType="Grid">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="LightSkyBlue" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+
     <ScrollView>
         <StackLayout
             Margin="20,0,20,0"
@@ -59,6 +77,33 @@
                 Text="{Binding Product.Description, Mode=TwoWay}"
                 />
             
+            <Label Text="Select Sizes" FontSize="18"/>
+
+            <StackLayout Margin="20">
+                <CollectionView 
+                    ItemsSource="{Binding Sizes, Mode=TwoWay}"
+                    SelectionMode="Multiple"
+                    ItemsLayout="HorizontalList"
+                    SelectedItems="{Binding SelectedSizes}"
+                    >
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20" />
+                                    <RowDefinition Height="10" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="10" />
+                                </Grid.ColumnDefinitions>
+                                <Label HorizontalTextAlignment="Center" Text="{ Binding Name }" FontSize="18"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+
             <Label Text="Photo" FontSize="18"/>
             <Button
                 HorizontalOptions="Start"

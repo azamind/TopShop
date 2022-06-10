@@ -12,6 +12,7 @@ namespace TopShopClient.ViewModels.Product
         public ICommand PhotoUploadCommand { get; }
         public IList<Category> Categories { get; set; }
         public IList<Brand> Brands { get; set; }
+        public IList<Models.Size> Sizes { get; set; } = new List<Models.Size>();
         public Brand SelectedBrand { get; set; }
         public Category SelectedCategory { get; set; }
 
@@ -26,7 +27,7 @@ namespace TopShopClient.ViewModels.Product
             }
         }
 
-        public string _productPhotoName;
+        private string _productPhotoName;
         public string ProductPhotoName
         {
             get => _productPhotoName;
@@ -37,7 +38,7 @@ namespace TopShopClient.ViewModels.Product
             }
         }
 
-        public ImageSource _path;
+        private ImageSource _path;
         public ImageSource Path
         {
             get => _path;
@@ -126,6 +127,17 @@ namespace TopShopClient.ViewModels.Product
             }
         }
 
+        private IList<Models.Size> _selectedSizes;
+        public IList<Models.Size> SelectedSizes
+        {
+            get => _selectedSizes;
+            set
+            {
+                _selectedSizes = value;
+                OnPropertyChanged("SelectedSizes");
+            }
+        }
+
         public CreateEditViewModel(IList<Category> categories, IList<Brand> brands)
         {
             Product = new Models.Product();
@@ -133,10 +145,16 @@ namespace TopShopClient.ViewModels.Product
             Brands = brands ?? throw new ArgumentNullException(nameof(brands));
             PhotoUploadCommand = new Command(ExecutePhotoUploadCommand);
             SaveCommand = new Command(SaveProductDataCommand);
+
+
+            Sizes.Add(new Models.Size { Id = 1, Name = "S" });
+            Sizes.Add(new Models.Size { Id = 2, Name = "M" });
         }  
 
         private async void SaveProductDataCommand()
         {
+            var selectedSizes = SelectedSizes;
+
             Models.Product ProductData = new Models.Product
             {
                 Title = Product.Title,
@@ -174,6 +192,7 @@ namespace TopShopClient.ViewModels.Product
             }
 
         }
+
     }
 
 }
