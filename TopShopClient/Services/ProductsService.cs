@@ -18,7 +18,10 @@ namespace TopShopClient.Services
             multipartContent.Add(new StringContent(Convert.ToString(ProductData.Price)), "Price");
             multipartContent.Add(new StringContent(ProductData.Description), "Description");
             multipartContent.Add(new StringContent(ProductData.ShortDescription), "ShortDescription");
+            multipartContent.Add(new StringContent(JsonSerializer.Serialize(ProductData.Sizes)), "Sizes");
             multipartContent.Add(new StringContent(JsonSerializer.Serialize(new List<string>() { ProductPhotoName })), "Photo");
+
+            var test = JsonSerializer.Serialize("1");
 
             var url = new Uri(domainUrl + "/api/v1/products");
             await httpClient.PostAsync(url, multipartContent);

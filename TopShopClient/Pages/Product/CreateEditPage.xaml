@@ -81,10 +81,10 @@
 
             <StackLayout Margin="20">
                 <CollectionView 
-                    ItemsSource="{Binding Sizes, Mode=TwoWay}"
+                    ItemsSource="{Binding Sizes}"
                     SelectionMode="Multiple"
                     ItemsLayout="HorizontalList"
-                    SelectedItems="{Binding SelectedSizes}"
+                    SelectedItems="{Binding SelectedSizes, Mode=TwoWay}"
                     >
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
@@ -97,7 +97,7 @@
                                     <ColumnDefinition Width="50" />
                                     <ColumnDefinition Width="10" />
                                 </Grid.ColumnDefinitions>
-                                <Label HorizontalTextAlignment="Center" Text="{ Binding Name }" FontSize="18"/>
+                                <Label HorizontalTextAlignment="Center" Text="{Binding Name}" FontSize="18"/>
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

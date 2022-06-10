@@ -127,8 +127,8 @@ namespace TopShopClient.ViewModels.Product
             }
         }
 
-        private IList<Models.Size> _selectedSizes;
-        public IList<Models.Size> SelectedSizes
+        private IList<object> _selectedSizes;
+        public IList<object> SelectedSizes
         {
             get => _selectedSizes;
             set
@@ -153,7 +153,7 @@ namespace TopShopClient.ViewModels.Product
 
         private async void SaveProductDataCommand()
         {
-            var selectedSizes = SelectedSizes;
+            var selectedSizes = SelectedSizes.Cast<Models.Size>().Select(s => s.Id).ToArray();
 
             Models.Product ProductData = new Models.Product
             {
@@ -165,6 +165,7 @@ namespace TopShopClient.ViewModels.Product
                 Price = Product.Price,
                 Description = Product.Description,
                 ShortDescription = Product.ShortDescription,
+                Sizes = selectedSizes,
             };
 
             await _productService.AddProductAsync(ProductData, ProductPhotoName);
