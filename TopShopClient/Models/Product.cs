@@ -13,5 +13,6 @@
         public string? ShortDescription { get; set; }
         public string? Photo { get; set; }
         public DateTime? CreatedAt { get; set; } = DateTime.Now;
+        public IEnumerable<int> Sizes { get; set; } = null!;
     }
 }

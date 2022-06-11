@@ -12,10 +12,11 @@ namespace TopShopServer.Repositories.Product
             _context = context;
         }
 
-        public async Task Create(Models.Product product)
+        public async Task<Models.Product> Create(Models.Product product)
         {
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
+            return product;
         }
 
         public async Task<Models.Product?> GetProductAsync(int productId)
