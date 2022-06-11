@@ -12,7 +12,7 @@ namespace TopShopClient.ViewModels.Product
         public ICommand PhotoUploadCommand { get; }
         public IList<Category> Categories { get; set; }
         public IList<Brand> Brands { get; set; }
-        public IList<Models.Size> Sizes { get; set; } = new List<Models.Size>();
+        public IList<Models.Size> Sizes { get; set; }
         public Brand SelectedBrand { get; set; }
         public Category SelectedCategory { get; set; }
 
@@ -138,17 +138,14 @@ namespace TopShopClient.ViewModels.Product
             }
         }
 
-        public CreateEditViewModel(IList<Category> categories, IList<Brand> brands)
+        public CreateEditViewModel(IList<Category> categories, IList<Brand> brands, IList<Models.Size> sizes)
         {
             Product = new Models.Product();
             Categories = categories ?? throw new ArgumentNullException(nameof(categories));
             Brands = brands ?? throw new ArgumentNullException(nameof(brands));
+            Sizes = sizes ?? throw new ArgumentNullException(nameof(sizes));
             PhotoUploadCommand = new Command(ExecutePhotoUploadCommand);
             SaveCommand = new Command(SaveProductDataCommand);
-
-
-            Sizes.Add(new Models.Size { Id = 1, Name = "S" });
-            Sizes.Add(new Models.Size { Id = 2, Name = "M" });
         }  
 
         private async void SaveProductDataCommand()
