@@ -20,6 +20,14 @@ namespace TopShopClient.Services
             multipartContent.Add(new StringContent(ProductData.ShortDescription), "ShortDescription");
             multipartContent.Add(new StringContent(JsonSerializer.Serialize(new List<string>() { ProductPhotoName })), "Photo");
 
+            if (ProductData.Sizes != null)
+            {
+                foreach (var size in ProductData.Sizes)
+                {
+                    multipartContent.Add(new StringContent(JsonSerializer.Serialize(size)), "Sizes");
+                }
+            }
+            
             var url = new Uri(domainUrl + "/api/v1/products");
             await httpClient.PostAsync(url, multipartContent);
         }

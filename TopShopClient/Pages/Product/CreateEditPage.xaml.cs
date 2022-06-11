@@ -7,6 +7,7 @@ public partial class CreateEditPage : ContentPage
 {
     private CategoriesService _categoriesService = new CategoriesService();
     private BrandsService _brandsService = new BrandsService();
+    private SizesService _sizesService = new SizesService();
     public Models.Product Product { get; set; }
 
     public CreateEditPage()
@@ -18,7 +19,8 @@ public partial class CreateEditPage : ContentPage
     {
         var categories = await _categoriesService.GetCategoriesAsync();
         var brands = await _brandsService.GetBrandsAsync();
-        BindingContext = new CreateEditViewModel(categories, brands);
+        var sizes = await _sizesService.GetSizesAsync();
+        BindingContext = new CreateEditViewModel(categories, brands, sizes);
     }
 
 

@@ -28,5 +28,7 @@ namespace TopShopServer.Models
         public string? ShortDescription { get; set; }
         public string? Photo { get; set; }
         public DateTime? CreatedAt { get; set; } = DateTime.Now;
+        [NotMapped]
+        public IEnumerable<int> Sizes { get; set; } = null!;
     }
 }

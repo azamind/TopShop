@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
 using TopShopServer.DTOs;
 using TopShopServer.Models;
 using TopShopServer.Repositories.Product;
-using TopShopServer.Services;
 
 namespace TopShopServer.Controllers
 {
@@ -12,10 +10,12 @@ namespace TopShopServer.Controllers
     {
         private IWebHostEnvironment _environment;
         private readonly IProductRepository _productRepository;
+        private readonly IProductSizeRepository _productSizeRepository;
         private readonly IMapper _mapper;
 
         public ProductsController(
             IProductRepository productRepository, 
+            IProductSizeRepository productSizeRepository,
             IMapper mapper, 
             IWebHostEnvironment environment
             )
@@ -24,6 +24,8 @@ namespace TopShopServer.Controllers
                 ?? throw new ArgumentNullException(nameof(environment));
             _productRepository = productRepository 
                 ?? throw new ArgumentNullException(nameof(productRepository));
+            _productSizeRepository = productSizeRepository
+                ?? throw new ArgumentNullException(nameof(productSizeRepository));
             _mapper = mapper 
                 ?? throw new ArgumentNullException(nameof(mapper));
         }
@@ -59,29 +61,12 @@ namespace TopShopServer.Controllers
         {
             try
             {
-                /*IList<string> fileNames = new List<string>();
-                var httpRequest = HttpContext.Request;
-
-                if (httpRequest.Form.Files.Count > 0)
+                if (product == null)
                 {
-                    foreach (var file in httpRequest.Form.Files)
-                    {
-                        string Name = $"{DateTime.Now.ToFileTime()}" + "-" + file.FileName;
-                        var filePath = Path.Combine(_environment.ContentRootPath, "images");
-                        if (!Directory.Exists(filePath))
-                            Directory.CreateDirectory(filePath);    
+                    throw new Exception("Enter data cannot be empty.");
+                }
 
-                        using (var memoryStream = new MemoryStream())
-                        {
-                            await file.CopyToAsync(memoryStream);
-                            System.IO.File.WriteAllBytes(Path.Combine(filePath, Name), memoryStream.ToArray());
-                        }
-
-                        fileNames.Add(Name);
-                    }
-                }*/
-
-                await _productRepository.Create(new Product
+                Product CreatedProduct = await _productRepository.Create(new Product
                 {
                     BrandId = product.BrandId,
                     CategoryId = product.CategoryId,
@@ -93,6 +78,11 @@ namespace TopShopServer.Controllers
                     Article = product.Article,
                     Photo = product.Photo
                 });
+
+                if (product.Sizes.Count() > 0)
+                {
+                    await _productSizeRepository.Create(product.Sizes, CreatedProduct.Id);
+                }
 
                 return Created("/", "Data successfully created.");
             } 

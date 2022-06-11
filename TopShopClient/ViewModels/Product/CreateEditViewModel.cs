@@ -12,6 +12,7 @@ namespace TopShopClient.ViewModels.Product
         public ICommand PhotoUploadCommand { get; }
         public IList<Category> Categories { get; set; }
         public IList<Brand> Brands { get; set; }
+        public IList<Models.Size> Sizes { get; set; }
         public Brand SelectedBrand { get; set; }
         public Category SelectedCategory { get; set; }
 
@@ -26,7 +27,7 @@ namespace TopShopClient.ViewModels.Product
             }
         }
 
-        public string _productPhotoName;
+        private string _productPhotoName;
         public string ProductPhotoName
         {
             get => _productPhotoName;
@@ -37,7 +38,7 @@ namespace TopShopClient.ViewModels.Product
             }
         }
 
-        public ImageSource _path;
+        private ImageSource _path;
         public ImageSource Path
         {
             get => _path;
@@ -126,17 +127,31 @@ namespace TopShopClient.ViewModels.Product
             }
         }
 
-        public CreateEditViewModel(IList<Category> categories, IList<Brand> brands)
+        private IList<object> _selectedSizes;
+        public IList<object> SelectedSizes
+        {
+            get => _selectedSizes;
+            set
+            {
+                _selectedSizes = value;
+                OnPropertyChanged("SelectedSizes");
+            }
+        }
+
+        public CreateEditViewModel(IList<Category> categories, IList<Brand> brands, IList<Models.Size> sizes)
         {
             Product = new Models.Product();
             Categories = categories ?? throw new ArgumentNullException(nameof(categories));
             Brands = brands ?? throw new ArgumentNullException(nameof(brands));
+            Sizes = sizes ?? throw new ArgumentNullException(nameof(sizes));
             PhotoUploadCommand = new Command(ExecutePhotoUploadCommand);
             SaveCommand = new Command(SaveProductDataCommand);
         }  
 
         private async void SaveProductDataCommand()
         {
+            var selectedSizes = SelectedSizes.Cast<Models.Size>().Select(s => s.Id).ToArray();
+
             Models.Product ProductData = new Models.Product
             {
                 Title = Product.Title,
@@ -147,6 +162,7 @@ namespace TopShopClient.ViewModels.Product
                 Price = Product.Price,
                 Description = Product.Description,
                 ShortDescription = Product.ShortDescription,
+                Sizes = selectedSizes,
             };
 
             await _productService.AddProductAsync(ProductData, ProductPhotoName);
@@ -174,6 +190,7 @@ namespace TopShopClient.ViewModels.Product
             }
 
         }
+
     }
 
 }
