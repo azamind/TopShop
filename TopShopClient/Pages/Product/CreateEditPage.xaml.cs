@@ -1,3 +1,4 @@
+using TopShopClient.Models;
 using TopShopClient.Services;
 using TopShopClient.ViewModels.Product;
 
@@ -13,9 +14,9 @@ public partial class CreateEditPage : ContentPage
     public CreateEditPage()
 	{
 		InitializeComponent();
-	}
+    }
 
-	protected override async void OnAppearing()
+    protected override async void OnAppearing()
     {
         var categories = await _categoriesService.GetCategoriesAsync();
         var brands = await _brandsService.GetBrandsAsync();

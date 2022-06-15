@@ -3,7 +3,9 @@
     public class BaseService
     {
         protected readonly HttpClient httpClient;
-        protected readonly string domainUrl = "https://localhost:7251";
+        protected readonly string domainUrl = DeviceInfo.Current.Platform == DevicePlatform.Android 
+            ? "http://192.168.1.177:5251"
+            : "http://localhost:5251";
 
         public BaseService()
         {

@@ -4,11 +4,25 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:TopShopClient"
+    xmlns:pageProduct="clr-namespace:TopShopClient.Pages.Product"
     Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <ShellContent 
+            Icon="sneakers.png"
+            ContentTemplate="{DataTemplate pageProduct:SneakersPage}" />
+        <ShellContent 
+            Icon="hoodie.png"
+            ContentTemplate="{DataTemplate pageProduct:HoodiesPage}" />
+        <ShellContent 
+            Icon="tshirt.png"
+            ContentTemplate="{DataTemplate pageProduct:TShirtPage}" />
+        <ShellContent 
+            Icon="jacket.png"
+            ContentTemplate="{DataTemplate pageProduct:JacketsPage}" />
+        <ShellContent 
+            Icon="jeans.png"
+            ContentTemplate="{DataTemplate pageProduct:JeansPage}" />
+    </TabBar>
 
 </Shell>
