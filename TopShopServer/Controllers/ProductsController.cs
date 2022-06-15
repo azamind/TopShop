@@ -31,9 +31,9 @@ namespace TopShopServer.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts()
+        public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts([FromQuery(Name = "CategoryId")] int? CategoryId)
         {
-            var products = await _productRepository.GetProductsAsync();
+            var products = await _productRepository.GetProductsAsync(CategoryId);
 
             if(products == null)
             {
