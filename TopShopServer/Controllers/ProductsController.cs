@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json.Linq;
+using System.Text.Json;
 using TopShopServer.DTOs;
 using TopShopServer.Models;
 using TopShopServer.Repositories.Product;
@@ -8,26 +11,29 @@ namespace TopShopServer.Controllers
 {
     public class ProductsController : BaseController
     {
+        private readonly IMapper _mapper;
+        private IConfiguration _configuration;
         private IWebHostEnvironment _environment;
         private readonly IProductRepository _productRepository;
         private readonly IProductSizeRepository _productSizeRepository;
-        private readonly IMapper _mapper;
 
         public ProductsController(
+            IMapper mapper,
+            IConfiguration configuration,
+            IWebHostEnvironment environment,
             IProductRepository productRepository, 
-            IProductSizeRepository productSizeRepository,
-            IMapper mapper, 
-            IWebHostEnvironment environment
-            )
-        {
+            IProductSizeRepository productSizeRepository
+        ){
+            _mapper = mapper
+                ?? throw new ArgumentNullException(nameof(mapper));
+            _configuration = configuration
+                ?? throw new ArgumentNullException(nameof(configuration));
             _environment = environment
                 ?? throw new ArgumentNullException(nameof(environment));
             _productRepository = productRepository 
                 ?? throw new ArgumentNullException(nameof(productRepository));
             _productSizeRepository = productSizeRepository
                 ?? throw new ArgumentNullException(nameof(productSizeRepository));
-            _mapper = mapper 
-                ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         [HttpGet]
@@ -35,12 +41,38 @@ namespace TopShopServer.Controllers
         {
             var products = await _productRepository.GetProductsAsync(CategoryId);
 
-            if(products == null)
+            if (products == null)
             {
                 return NotFound();
             }
 
-            return Ok(_mapper.Map<IEnumerable<ProductDto>>(products));
+            IList<ProductDto> productsDto = new List<ProductDto>();
+
+            foreach (var product in products)
+            {
+                var photoLinks = new List<string>();
+                var photos = JsonSerializer.Deserialize<IEnumerable<string>>(product.Photo);
+
+                if (photos != null)
+                {
+                    foreach (var photo in photos)
+                    {
+                        photoLinks.Add(_configuration.GetValue<string>("hostRunning") + "/api/v1/products/images/" + photo);
+                    }
+                }
+
+                productsDto.Add(new ProductDto
+                {
+                    Id = product.Id,
+                    Photo = photoLinks,
+                    BrandName = product?.Brand?.Name,
+                    Title = product?.Title,
+                    Price = product?.Price,
+                    CreatedAt = product?.CreatedAt
+                });
+            }
+
+            return Ok(productsDto);
         }
 
         [HttpGet("{id}")]
