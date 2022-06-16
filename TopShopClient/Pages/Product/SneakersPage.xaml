@@ -7,10 +7,15 @@
     <CollectionView 
         x:Name="CollectionViewProducts"
         >
+        <CollectionView.ItemsLayout>
+            <GridItemsLayout Orientation="Vertical" Span="2" />
+        </CollectionView.ItemsLayout>
         <CollectionView.ItemTemplate>
             <DataTemplate>
                 <Grid Padding="10">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
@@ -18,27 +23,34 @@
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
+                    <Image
+                        Grid.Row="0"
+                        Source="{Binding Photo}"
+                        Aspect="Fill" 
+                        WidthRequest="250"
+                        HeightRequest="300"/>
                     <Label 
-                        Grid.Column="1"
-                        Text="{Binding Title}"
-                        FontAttributes="Bold" />
-                    <Label 
+                        Margin="10 0 0 0"
                         Grid.Row="1"
-                        Grid.Column="1"
-                        Text="{Binding Price}"
-                        FontAttributes="Italic"
+                        Text="{Binding BrandName}"
+                        HorizontalTextAlignment="Center"
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        />
+                    <Label
+                        Margin="10 0 10 0"
+                        Grid.Row="2"
+                        FontSize="12"
+                        TextColor="Gray"
+                        Text="{Binding Title}"
+                        HorizontalTextAlignment="Center"
+                        />
+                    <Label 
+                        Grid.Row="3"
+                        Text="{Binding Path=Price, StringFormat='${0}'}"
+                        HorizontalTextAlignment="Center"
+                        FontSize="18"
                         VerticalOptions="End" />
-                    
-                    <CollectionView ItemsSource="{Binding Photo}">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <Image 
-                                    Source="{Binding Photo}"
-                                    Aspect="AspectFill" />
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                    
                 </Grid>
             </DataTemplate>
         </CollectionView.ItemTemplate>
