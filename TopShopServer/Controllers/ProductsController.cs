@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json.Linq;
 using System.Text.Json;
 using TopShopServer.DTOs;
 using TopShopServer.Models;
@@ -158,6 +156,13 @@ namespace TopShopServer.Controllers
             }
 
             return Ok(fileNames);
+        }
+
+        [HttpGet("images/{name}")]
+        public IActionResult GetPhoto(string Name)
+        {
+            string filePath = _environment.ContentRootPath + "\\images\\" + Name;
+            return PhysicalFile(filePath, "image/jpeg");
         }
 
     }
