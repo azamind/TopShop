@@ -48,15 +48,12 @@ namespace TopShopServer.Controllers
 
             foreach (var product in products)
             {
-                var photoLinks = new List<string>();
+                string photoLinks = string.Empty;
                 var photos = JsonSerializer.Deserialize<IEnumerable<string>>(product.Photo);
 
                 if (photos != null)
                 {
-                    foreach (var photo in photos)
-                    {
-                        photoLinks.Add(_configuration.GetValue<string>("hostRunning") + "/api/v1/products/images/" + photo);
-                    }
+                    photoLinks = _configuration.GetValue<string>("hostRunning") + "/api/v1/products/images/" + photos.First();
                 }
 
                 productsDto.Add(new ProductDto
