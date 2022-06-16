@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Web;
 using TopShopClient.Models;
 
 namespace TopShopClient.Services
@@ -43,9 +44,13 @@ namespace TopShopClient.Services
             return System.Text.Json.JsonSerializer.Deserialize<IEnumerable<string>>(response.Content.ReadAsStringAsync().Result).First();
         }
 
-        public async Task<IList<Product>> GetProductsAsync(int? CategoryId)
+        public async Task<IList<Product>> GetProductsAsync(int CategoryId)
         {
-            var url = new Uri(domainUrl + "/api/v1/products");
+            var uriBuilder = new UriBuilder(domainUrl + "/api/v1/products");
+            var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+            query["CategoryId"] = CategoryId.ToString();
+            uriBuilder.Query = query.ToString();
+            var url = uriBuilder.ToString();
             HttpResponseMessage response = await httpClient.GetAsync(url);
 
             if (response.IsSuccessStatusCode)
