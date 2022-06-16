@@ -1,12 +1,11 @@
 using TopShopClient.Models;
 using TopShopClient.Services;
-using TopShopClient.ViewModels.Product;
 
 namespace TopShopClient.Pages.Product;
 
 public partial class SneakersPage : ContentPage
 {
-	public IEnumerable<Models.Product> Products;
+	public IList<ProductList> Products = new List<ProductList>();
 	private ProductsService _productService = new ProductsService();
 
 	public SneakersPage()
@@ -16,7 +15,8 @@ public partial class SneakersPage : ContentPage
 
     protected override async void OnAppearing()
     {
-        ProductsCollectionView.ItemsSource = await _productService.GetProductsAsync(((int)CategoryEnum.Sneakers));
+        Products = await _productService.GetProductsAsync(((int)CategoryEnum.Sneakers));
+        CollectionViewProducts.ItemsSource = Products;
     }
 
 }

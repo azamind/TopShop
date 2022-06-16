@@ -4,7 +4,9 @@
              x:Class="TopShopClient.Pages.Product.SneakersPage"
              Title="SneakersPage">
 
-    <CollectionView x:Name="ProductsCollectionView">
+    <CollectionView 
+        x:Name="CollectionViewProducts"
+        >
         <CollectionView.ItemTemplate>
             <DataTemplate>
                 <Grid Padding="10">
@@ -16,14 +18,27 @@
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="1"
-                       Text="{Binding Title}"
-                       FontAttributes="Bold" />
-                    <Label Grid.Row="1"
-                       Grid.Column="1"
-                       Text="{Binding Price}"
-                       FontAttributes="Italic"
-                       VerticalOptions="End" />
+                    <Label 
+                        Grid.Column="1"
+                        Text="{Binding Title}"
+                        FontAttributes="Bold" />
+                    <Label 
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Text="{Binding Price}"
+                        FontAttributes="Italic"
+                        VerticalOptions="End" />
+                    
+                    <CollectionView ItemsSource="{Binding Photo}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Image 
+                                    Source="{Binding Photo}"
+                                    Aspect="AspectFill" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    
                 </Grid>
             </DataTemplate>
         </CollectionView.ItemTemplate>

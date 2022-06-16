@@ -44,7 +44,7 @@ namespace TopShopClient.Services
             return System.Text.Json.JsonSerializer.Deserialize<IEnumerable<string>>(response.Content.ReadAsStringAsync().Result).First();
         }
 
-        public async Task<IList<Product>> GetProductsAsync(int CategoryId)
+        public async Task<IList<ProductList>> GetProductsAsync(int CategoryId)
         {
             var uriBuilder = new UriBuilder(domainUrl + "/api/v1/products");
             var query = HttpUtility.ParseQueryString(uriBuilder.Query);
@@ -56,9 +56,9 @@ namespace TopShopClient.Services
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<IList<Product>>(content);
+                return JsonConvert.DeserializeObject<IList<ProductList>>(content);
             }
-            return new List<Product>();
+            return new List<ProductList>();
         }
 
     }
