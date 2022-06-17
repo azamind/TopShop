@@ -16,7 +16,7 @@
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.topshopclient</ApplicationId>
-		<ApplicationIdGuid>E81C8DCD-EF0D-4A0B-B9E2-C57F0C0DEFE0</ApplicationIdGuid>
+		<ApplicationIdGuid>76E9D09E-C8B4-4139-980D-ADA15E1B9313</ApplicationIdGuid>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -49,21 +49,34 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\hoodie.png" />
+	  <None Remove="Resources\Images\jacket.png" />
+	  <None Remove="Resources\Images\jeans.png" />
+	  <None Remove="Resources\Images\sneakers.png" />
+	  <None Remove="Resources\Images\tshirt.png" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-	  <PackageReference Include="Xamarin.MediaGallery" Version="2.1.1" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Pages\Product\CreateEditPage.xaml.cs">
-	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-	  </Compile>
-	  <Compile Update="ViewModels\Product\CreateEditViewModel.cs">
-	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-	  </Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiXaml Update="Pages\Product\CreateEditPage.xaml">
+	  <MauiXaml Update="Pages\Product\DetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Product\HoodiesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Product\JacketsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Product\JeansPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Product\SneakersPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Product\TShirtPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
