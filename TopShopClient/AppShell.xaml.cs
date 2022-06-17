@@ -9,6 +9,7 @@ namespace TopShopClient
             InitializeComponent();
 
             Routing.RegisterRoute(nameof(CreateEditPage), typeof(CreateEditPage));
+            Routing.RegisterRoute("products/details", typeof(DetailPage));
         }
     }
 }
