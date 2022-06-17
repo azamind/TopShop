@@ -3,10 +3,49 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TopShopClient.Pages.Product.DetailPage"
              Title="DetailPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Product Detail"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ScrollView>
+        <VerticalStackLayout>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+            </Grid>
+
+            <Label
+                FontSize="30"
+                FontAttributes="Bold"
+                Grid.Row="0"
+                Text="BRAND"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" 
+            />
+            <Label 
+                FontSize="25"
+                FontAttributes="Bold"
+                Grid.Row="1"
+                Text="Product Title"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" 
+            />
+            <Image
+                Grid.Row="2"
+                WidthRequest="500"
+                HeightRequest="600"
+                Source="https://img.brandshop.ru/cache/products/g/gy4419-1_1104x1104.jpg"
+                />
+            <Label 
+                FontSize="25"
+                FontAttributes="Bold"
+                Grid.Row="1"
+                Text="Available Size"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" 
+            />
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

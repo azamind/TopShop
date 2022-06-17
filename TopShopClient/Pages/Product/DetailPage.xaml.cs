@@ -1,22 +1,15 @@
+using TopShopClient.ViewModels.Product;
+
 namespace TopShopClient.Pages.Product;
 
-[QueryProperty("ProductId", "productId")]
 public partial class DetailPage : ContentPage
 {
-	public int ProductId { 
-		set
-        {
-            LoadProduct(value);
-        }
-	}
-
-	public DetailPage()
+    public DetailPage()
 	{
-		InitializeComponent();
-	}
+        InitializeComponent();
 
-	private async void LoadProduct(int productId)
-	{
+        BindingContext = new DetailViewModel();
+    }
 
-	}
+    
 }
