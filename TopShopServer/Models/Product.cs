@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Newtonsoft.Json.Linq;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TopShopServer.Models
@@ -26,7 +27,7 @@ namespace TopShopServer.Models
         public string? Description { get; set; }
         [Required]
         public string? ShortDescription { get; set; }
-        public string? Photo { get; set; }
+        public string Photo { get; set; } = string.Empty;
         public DateTime? CreatedAt { get; set; } = DateTime.Now;
         [NotMapped]
         public IEnumerable<int> Sizes { get; set; } = null!;

@@ -28,7 +28,15 @@ namespace TopShopServer.Repositories.Product
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<Models.Product>> GetProductsAsync() => await _context.Products.ToListAsync();
+        public async Task<IEnumerable<Models.Product>> GetProductsAsync(int? CategoryId)
+        {
+            var query = _context.Products.Include(p => p.Brand);
+            if (CategoryId == null)
+            {
+                return await query.ToListAsync();
+            }
+            return await query.Where(p => p.CategoryId == CategoryId).ToListAsync();
+        }
 
         public async Task Update(int productId, Models.Product product)
         {
