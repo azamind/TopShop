@@ -1,11 +1,12 @@
 ﻿using System.Web;
+using TopShopClient.Models;
 using TopShopClient.Services;
 
 namespace TopShopClient.ViewModels.Product
 {
     public class DetailViewModel : BaseViewModel, IQueryAttributable
     {
-        private Models.Product _product;
+        public ProductDetail Product;
         private ProductsService _productsService = new ProductsService();
      
         public DetailViewModel()
@@ -23,7 +24,7 @@ namespace TopShopClient.ViewModels.Product
         {
             try
             {
-                _product = await _productsService.GetProductAsync(productId);
+                Product = await _productsService.GetProductAsync(productId);
             }
             catch (Exception)
             {

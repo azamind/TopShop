@@ -14,5 +14,6 @@
         public string Photo { get; set; } = String.Empty;
         public DateTime? CreatedAt { get; set; } = DateTime.Now;
         public IEnumerable<int> Sizes { get; set; } = null!;
+        public IEnumerable<ProductSize> ProductSizes { get; set; } = null!;
     }
 }

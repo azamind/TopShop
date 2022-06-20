@@ -61,7 +61,7 @@ namespace TopShopClient.Services
             return new List<ProductList>();
         }
 
-        public async Task<Product> GetProductAsync(int ProductId)
+        public async Task<ProductDetail> GetProductAsync(int ProductId)
         {
             var url = new Uri(domainUrl + "/api/v1/products/" + ProductId);
             HttpResponseMessage response = await httpClient.GetAsync(url);
@@ -69,10 +69,10 @@ namespace TopShopClient.Services
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<Product>(content);
+                return JsonConvert.DeserializeObject<ProductDetail>(content);
             }
 
-            return new Product();
+            return new ProductDetail();
         }
  
     }
