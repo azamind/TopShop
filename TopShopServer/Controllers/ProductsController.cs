@@ -74,11 +74,21 @@ namespace TopShopServer.Controllers
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
             var product = await _productRepository.GetProductAsync(id);
+            var productSizes = await _productSizeRepository.GetSizesAsync(id);
+
+            IList<ProductSizeDto> sizes = new List<ProductSizeDto>();
 
             if (product == null)
             {
                 return NotFound();
             }
+
+            foreach (var productSize in productSizes)
+            {
+                sizes.Add(new ProductSizeDto { SizeId = productSize.Size.Id, Name = productSize.Size.Name});
+            }
+
+            product.ProductSizes = sizes;
 
             return Ok(product);
         }

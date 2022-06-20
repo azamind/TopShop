@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TopShopServer.DTOs;
 
 namespace TopShopServer.Models
 {
@@ -31,5 +32,7 @@ namespace TopShopServer.Models
         public DateTime? CreatedAt { get; set; } = DateTime.Now;
         [NotMapped]
         public IEnumerable<int> Sizes { get; set; } = null!;
+        [NotMapped]
+        public IEnumerable<ProductSizeDto> ProductSizes { get; set; } = null!;
     }
 }
