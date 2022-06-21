@@ -30,7 +30,7 @@
                         Source="{Binding Photo}"
                         Aspect="Fill" 
                         WidthRequest="250"
-                        HeightRequest="300"/>
+                        HeightRequest="250"/>
                     <Label 
                         Margin="10,0,0,0"
                         Grid.Row="1"

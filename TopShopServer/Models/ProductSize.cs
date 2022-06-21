@@ -9,5 +9,6 @@ namespace TopShopServer.Models
         public int ProductId { get; set; }
         [Required]
         public int SizeId { get; set; }
+        public Size Size { get; set; } = null!;
     }
 }

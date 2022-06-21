@@ -1,4 +1,5 @@
-﻿using TopShopServer.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using TopShopServer.Models;
 
 namespace TopShopServer.Repositories.Product
 {
@@ -24,5 +25,11 @@ namespace TopShopServer.Repositories.Product
             await _context.SaveChangesAsync();
         }
 
+        public async Task<IEnumerable<ProductSize>> GetSizesAsync(int ProductId)
+        {
+            return await _context.ProductSizes
+                .Include(ps => ps.Size)
+                .Where(ps => ps.ProductId == ProductId).ToListAsync();
+        }
     }
 }

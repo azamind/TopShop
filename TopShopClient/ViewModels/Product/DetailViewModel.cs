@@ -1,11 +1,33 @@
 ﻿using System.Web;
+using TopShopClient.Models;
 using TopShopClient.Services;
 
 namespace TopShopClient.ViewModels.Product
 {
     public class DetailViewModel : BaseViewModel, IQueryAttributable
     {
-        private Models.Product _product;
+        private ProductDetail _product;
+        public ProductDetail Product
+        {
+            get => _product;
+            set
+            {
+                _product = value;
+                OnPropertyChanged("Product");
+            }
+        }
+
+        private string _photoLinks;
+        public string PhotoLinks
+        {
+            get => _photoLinks;
+            set
+            {
+                _photoLinks = value;
+                OnPropertyChanged("PhotoLinks");
+            }
+        }
+
         private ProductsService _productsService = new ProductsService();
      
         public DetailViewModel()
@@ -23,7 +45,9 @@ namespace TopShopClient.ViewModels.Product
         {
             try
             {
-                _product = await _productsService.GetProductAsync(productId);
+                Product = await _productsService.GetProductAsync(productId);
+                // so far, we will show only one picture
+                PhotoLinks = Product.PhotoLinks.First();
             }
             catch (Exception)
             {
