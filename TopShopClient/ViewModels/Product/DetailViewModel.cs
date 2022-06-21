@@ -6,7 +6,18 @@ namespace TopShopClient.ViewModels.Product
 {
     public class DetailViewModel : BaseViewModel, IQueryAttributable
     {
-        public ProductDetail Product;
+        private ProductDetail _product;
+
+        public ProductDetail Product
+        {
+            get => _product;
+            set
+            {
+                _product = value;
+                OnPropertyChanged("Product");
+            }
+        }
+
         private ProductsService _productsService = new ProductsService();
      
         public DetailViewModel()
