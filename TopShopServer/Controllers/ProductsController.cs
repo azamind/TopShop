@@ -74,13 +74,45 @@ namespace TopShopServer.Controllers
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
             var product = await _productRepository.GetProductAsync(id);
+            var productSizes = await _productSizeRepository.GetSizesAsync(id);
+            var photos = JsonSerializer.Deserialize<IEnumerable<string>>(product.Photo);
+            
+            IList<string> photoLinks = new List<string>();
+            IList<ProductSizeDto> sizes = new List<ProductSizeDto>();
 
             if (product == null)
             {
                 return NotFound();
             }
 
-            return Ok(product);
+            if (photos != null)
+            {
+                foreach(var photo in photos)
+                {
+                    photoLinks.Add(_configuration.GetValue<string>("hostRunning") + "/api/v1/products/images/" + photo);
+                }
+            }
+
+            foreach (var productSize in productSizes)
+            {
+                sizes.Add(new ProductSizeDto { SizeId = productSize.Size.Id, Name = productSize.Size.Name});
+            }
+
+            ProductDetailDto productDetail = new ProductDetailDto
+            {
+                Id = product.Id,
+                Brand = product.Brand,
+                Category = product.Category,
+                Title = product.Title,
+                Description = product.Description,
+                Price = product.Price,
+                Article = product.Article,
+                Code = product.Code,
+                ProductSizes = sizes,
+                PhotoLinks = photoLinks,
+            };
+
+            return Ok(productDetail);
         }
 
         [HttpPost]

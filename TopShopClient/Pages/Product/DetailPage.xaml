@@ -13,39 +13,112 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="75" />
+                    <RowDefinition Height="75" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-            </Grid>
 
-            <Label
-                FontSize="30"
-                FontAttributes="Bold"
-                Grid.Row="0"
-                Text="BRAND"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" 
-            />
-            <Label 
-                FontSize="25"
-                FontAttributes="Bold"
-                Grid.Row="1"
-                Text="Product Title"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" 
-            />
-            <Image
-                Grid.Row="2"
-                WidthRequest="500"
-                HeightRequest="600"
-                Source="https://img.brandshop.ru/cache/products/g/gy4419-1_1104x1104.jpg"
+                <Label
+                    FontSize="30"
+                    FontAttributes="Bold"
+                    Grid.Row="0"
+                    Text="{Binding Product.Brand.Name}"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center" 
                 />
-            <Label 
-                FontSize="25"
-                FontAttributes="Bold"
-                Grid.Row="1"
-                Text="Available Size"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" 
-            />
+                <Label 
+                    FontSize="25"
+                    FontAttributes="Bold"
+                    Grid.Row="1"
+                    Text="{Binding Product.Title}"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center" 
+                />
+                <Image
+                    Grid.Row="2"
+                    WidthRequest="500"
+                    HeightRequest="600"
+                    Source="{Binding PhotoLinks}"
+                    />
+                <Label
+                    Grid.Row="3"
+                    FontSize="25"
+                    FontAttributes="Bold"
+                    Text="Available Size"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center" 
+                />
+
+                <StackLayout Grid.Row="4"  Margin="20" WidthRequest="600">
+                    <CollectionView 
+                            ItemsSource="{Binding Product.ProductSizes}"
+                            SelectionMode="Multiple"
+                            ItemsLayout="HorizontalList"
+                            >
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Padding="10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="20" />
+                                        <RowDefinition Height="10" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition Width="10" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label HorizontalTextAlignment="Center" Text="{Binding Name}" FontSize="18"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+
+                <BoxView 
+                    Grid.Row="5" 
+                    HeightRequest="2" 
+                    Color="White" 
+                    WidthRequest="500"
+                />
+
+                <Button
+                    Margin="0,20"
+                    HorizontalOptions="Center"
+                    WidthRequest="300"
+                    Grid.Row="6"
+                    Text="Add to basket"
+                />
+
+                <Label 
+                    WidthRequest="500"
+                    Grid.Row="7"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    Text="{Binding Path=Product.Article, StringFormat='Article: {0}'}"
+                    VerticalOptions="Center" 
+                />
+                <Label 
+                    WidthRequest="500"
+                    Grid.Row="8"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    Text="{Binding Path=Product.Code, StringFormat='Code: {0}'}"
+                    VerticalOptions="Center" 
+                />
+                <Label 
+                    WidthRequest="500"
+                    Grid.Row="9"
+                    FontSize="16"
+                    Text="{Binding Path=Product.Description, StringFormat='Description: {0}'}"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center" 
+                />
+
+            </Grid>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
