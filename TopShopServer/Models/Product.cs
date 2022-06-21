@@ -16,23 +16,25 @@ namespace TopShopServer.Models
         public Category? Category { get; set; }
         [Required]
         [MaxLength(100)]
-        public string? Title { get; set; }
+        public string Title { get; set; } = string.Empty;
         [Required]
         [Column(TypeName = "decimal(18,2)")]
         public decimal? Price { get; set; }
         [Required]
-        public string? Article { get; set; }
+        public string Article { get; set; } = string.Empty;
         [Required]
-        public string? Code { get; set; }
+        public string Code { get; set; } = string.Empty;
         [Required]
-        public string? Description { get; set; }
+        public string Description { get; set; } = string.Empty;
         [Required]
-        public string? ShortDescription { get; set; }
+        public string ShortDescription { get; set; } = string.Empty;
         public string Photo { get; set; } = string.Empty;
         public DateTime? CreatedAt { get; set; } = DateTime.Now;
         [NotMapped]
         public IEnumerable<int> Sizes { get; set; } = null!;
         [NotMapped]
         public IEnumerable<ProductSizeDto> ProductSizes { get; set; } = null!;
+        [NotMapped]
+        public IEnumerable<string> PhotoLinks { get; set; } = null!;
     }
 }
