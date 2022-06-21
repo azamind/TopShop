@@ -17,7 +17,7 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="50" />
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="100" />
                     <RowDefinition Height="75" />
                     <RowDefinition Height="75" />
                     <RowDefinition Height="*" />
@@ -43,7 +43,7 @@
                     Grid.Row="2"
                     WidthRequest="500"
                     HeightRequest="600"
-                    Source="https://img.brandshop.ru/cache/products/g/gy4419-1_1104x1104.jpg"
+                    Source="{Binding PhotoLinks}"
                     />
                 <Label
                     Grid.Row="3"
@@ -54,7 +54,7 @@
                     HorizontalOptions="Center" 
                 />
 
-                <StackLayout Grid.Row="4"  Margin="20">
+                <StackLayout Grid.Row="4"  Margin="20" WidthRequest="600">
                     <CollectionView 
                             ItemsSource="{Binding Product.ProductSizes}"
                             SelectionMode="Multiple"
