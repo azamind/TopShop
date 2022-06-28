@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TopShopClient.Pages.Product.SneakersPage"
-             Title="SneakersPage">
+<ContentPage 
+    xmlns:converter="clr-namespace:TopShopClient.Converters"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="TopShopClient.Pages.Product.SneakersPage"
+    Title="SneakersPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:PhotoLinkConverter x:Key="photoLinkConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <CollectionView 
         x:Name="CollectionViewProducts"
@@ -27,7 +35,7 @@
                     </Grid.ColumnDefinitions>
                     <Image
                         Grid.Row="0"
-                        Source="{Binding Photo}"
+                        Source="{Binding Path=Photo, Converter={StaticResource photoLinkConverter}}"
                         Aspect="Fill" 
                         WidthRequest="250"
                         HeightRequest="250"/>
