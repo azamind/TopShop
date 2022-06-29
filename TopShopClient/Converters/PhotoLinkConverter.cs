@@ -9,7 +9,11 @@ namespace TopShopClient.Converters
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return _baseService.domainUrl + value.ToString();
+            if (value != null)
+            {
+                return _baseService.domainUrl + value.ToString();
+            }
+            return null;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

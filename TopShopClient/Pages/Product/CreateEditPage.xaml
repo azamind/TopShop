@@ -13,7 +13,7 @@
                         <VisualState x:Name="Normal" />
                         <VisualState x:Name="Selected">
                             <VisualState.Setters>
-                                <Setter Property="BackgroundColor" Value="LightSkyBlue" />
+                                <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>
@@ -110,7 +110,13 @@
                 Command="{Binding PhotoUploadCommand}"
                 />
 
-            <Image Source="{Binding Path}" HorizontalOptions="Start" HeightRequest="250" WidthRequest="250" />
+            <Image 
+                Margin="0,0,0,10"
+                Source="{Binding Path}"
+                HorizontalOptions="Start" 
+                HeightRequest="250" 
+                WidthRequest="250" 
+            />
 
             <!-- This collection need for multiple image display (implement letter)
             
@@ -134,15 +140,24 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>-->
-            
-            <Button
-                Command="{Binding SaveCommand}"
-                Margin="0, 10, 0, 0"
-                Text="Send"
-                FontAttributes="Bold"
-                FontSize="20"
-                HorizontalOptions="StartAndExpand"
+
+            <Grid Margin="0,0,0,10" ColumnSpacing="5" ColumnDefinitions="1*, 1*" RowDefinitions="1*, Auto">
+                <Button
+                    Grid.Row="0" Grid.Column="0"
+                    Command="{Binding SaveCommand}"
+                    Text="Send"
+                    FontAttributes="Bold"
+                    FontSize="20"
                 />
+                <Button
+                    Grid.Row="0" Grid.Column="1"
+                    Command="{Binding CancelCommand}"
+                    Text="Cancel"
+                    FontAttributes="Bold"
+                    FontSize="20"
+                />
+            </Grid>
+            
         </StackLayout>
     </ScrollView>
 </ContentPage>

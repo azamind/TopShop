@@ -12,12 +12,11 @@
             <converter:ProductTitleSliceConverter x:Key="productTitleSliceConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
-
     <CollectionView 
         x:Name="CollectionViewProducts"
         SelectionMode="Single"
         SelectionChanged="OnSelectionChanged"
-        >
+    >
         <CollectionView.ItemsLayout>
             <GridItemsLayout Orientation="Vertical" Span="2" />
         </CollectionView.ItemsLayout>
@@ -48,7 +47,7 @@
                         HorizontalTextAlignment="Center"
                         FontAttributes="Bold"
                         FontSize="18"
-                        />
+                    />
                     <Label
                         Margin="0,5,0,5"
                         Grid.Row="2"
@@ -57,17 +56,17 @@
                         Text="{Binding Path=Title, Converter={StaticResource productTitleSliceConverter}}"
                         HorizontalTextAlignment="Center"
                         WidthRequest="185"
-                        />
+                    />
                     <Label 
                         Grid.Row="3"
                         Text="{Binding Path=Price, StringFormat='${0}'}"
                         HorizontalTextAlignment="Center"
                         VerticalTextAlignment="End"
                         FontSize="18"
-                        VerticalOptions="End" />
+                        VerticalOptions="End" 
+                    />
                 </Grid>
             </DataTemplate>
         </CollectionView.ItemTemplate>
     </CollectionView>
-    
 </ContentPage>
