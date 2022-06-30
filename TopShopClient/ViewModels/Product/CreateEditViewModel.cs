@@ -169,7 +169,7 @@ namespace TopShopClient.ViewModels.Product
 
             await _productService.AddProductAsync(ProductData, ProductPhotoName);
 
-            await Shell.Current.GoToAsync("..");
+            ReturnToMainPageCommand();
         }
 
         private async void ReturnToMainPageCommand()

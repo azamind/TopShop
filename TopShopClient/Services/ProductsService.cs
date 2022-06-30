@@ -28,7 +28,7 @@ namespace TopShopClient.Services
                     multipartContent.Add(new StringContent(System.Text.Json.JsonSerializer.Serialize(size)), "Sizes");
                 }
             }
-            
+
             var url = new Uri(domainUrl + "/api/v1/products");
             await httpClient.PostAsync(url, multipartContent);
         }
