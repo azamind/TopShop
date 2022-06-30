@@ -1,4 +1,6 @@
-﻿namespace TopShopClient.Services
+﻿using MonkeyCache.FileStore;
+
+namespace TopShopClient.Services
 {
     public class BaseService
     {
@@ -11,6 +13,7 @@
         {
             httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
+            Barrel.ApplicationId = "TopShopCachingData";
         }
 
     }
