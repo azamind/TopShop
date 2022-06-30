@@ -22,7 +22,7 @@
         </Style>
     </ContentPage.Resources>
 
-    <ScrollView Margin="20,0">
+    <ScrollView Margin="10,20">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -43,7 +43,7 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="*" /><!-- Sizes row -->
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -111,30 +111,30 @@
                 Keyboard="Chat"
             />
             <Label  Grid.Row="14" Text="Select Sizes" FontSize="18"/>
-            <StackLayout  Grid.Row="15" Margin="20">
-                <CollectionView 
-                    ItemsSource="{Binding Sizes}"
-                    SelectionMode="Multiple"
-                    ItemsLayout="HorizontalList"
-                    SelectedItems="{Binding SelectedSizes, Mode=TwoWay}"
-                >
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Padding="10">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="20" />
-                                    <RowDefinition Height="10" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50" />
-                                    <ColumnDefinition Width="10" />
-                                </Grid.ColumnDefinitions>
-                                <Label HorizontalTextAlignment="Center" Text="{Binding Name}" FontSize="18"/>
-                            </Grid>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </StackLayout>
+            <CollectionView 
+                EmptyView="No items to display"
+                Grid.Row="15" 
+                Margin="20"
+                ItemsSource="{Binding Sizes}"
+                SelectionMode="Multiple"
+                SelectedItems="{Binding SelectedSizes, Mode=TwoWay}"
+            >
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="4" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="5">
+                            <Label
+                                Padding="0,5"
+                                HorizontalOptions="Center" 
+                                Text="{Binding Name}" 
+                                FontSize="16"
+                            />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
             <Button
                 Grid.Row="16"
                 HorizontalOptions="Start"
@@ -174,7 +174,7 @@
                 </CollectionView>
             -->
 
-            <Grid Grid.Row="18" Margin="0,0,0,10" ColumnSpacing="5" ColumnDefinitions="1*, 1*" RowDefinitions="1*, Auto">
+            <Grid Grid.Row="18" ColumnSpacing="5" ColumnDefinitions="1*, 1*" RowDefinitions="1*, Auto">
                 <Button
                     Grid.Row="0" Grid.Column="0"
                     Command="{Binding SaveCommand}"
