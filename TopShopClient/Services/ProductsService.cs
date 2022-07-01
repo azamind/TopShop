@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MonkeyCache.FileStore;
+using Newtonsoft.Json;
 using System.Web;
 using TopShopClient.Models;
 
@@ -51,12 +52,21 @@ namespace TopShopClient.Services
             query["CategoryId"] = CategoryId.ToString();
             uriBuilder.Query = query.ToString();
             var url = uriBuilder.ToString();
+
+            if (!Barrel.Current.IsExpired(key: url))
+            {
+                await Task.Yield();
+                return Barrel.Current.Get<List<ProductList>>(key: url);
+            }
+
             HttpResponseMessage response = await httpClient.GetAsync(url);
 
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<IList<ProductList>>(content);
+                var data = JsonConvert.DeserializeObject<IList<ProductList>>(content);
+                Barrel.Current.Add(key: url, data: data, expireIn: TimeSpan.FromMinutes(30));
+                return data;
             }
             return new List<ProductList>();
         }
