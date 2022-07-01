@@ -12,7 +12,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<!-- Display name -->
-		<ApplicationTitle>TopShopClient</ApplicationTitle>
+		<ApplicationTitle>TopShop</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.topshopclient</ApplicationId>
@@ -57,6 +57,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="MonkeyCache.FileStore" Version="1.6.3" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	</ItemGroup>
 

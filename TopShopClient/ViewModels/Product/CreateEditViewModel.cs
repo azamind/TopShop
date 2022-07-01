@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using TopShopClient.Models;
 using TopShopClient.Services;
 
@@ -9,6 +10,7 @@ namespace TopShopClient.ViewModels.Product
         public Models.Product Product { get; private set; }
         private ProductsService _productService = new ProductsService();
         public ICommand SaveCommand { get; set; }
+        public ICommand CancelCommand { get; set; }
         public ICommand PhotoUploadCommand { get; }
         public IList<Category> Categories { get; set; }
         public IList<Brand> Brands { get; set; }
@@ -141,11 +143,12 @@ namespace TopShopClient.ViewModels.Product
         public CreateEditViewModel(IList<Category> categories, IList<Brand> brands, IList<Models.Size> sizes)
         {
             Product = new Models.Product();
+            Sizes = sizes ?? throw new ArgumentNullException(nameof(sizes));
             Categories = categories ?? throw new ArgumentNullException(nameof(categories));
             Brands = brands ?? throw new ArgumentNullException(nameof(brands));
-            Sizes = sizes ?? throw new ArgumentNullException(nameof(sizes));
             PhotoUploadCommand = new Command(ExecutePhotoUploadCommand);
             SaveCommand = new Command(SaveProductDataCommand);
+            CancelCommand = new Command(ReturnToMainPageCommand);
         }  
 
         private async void SaveProductDataCommand()
@@ -167,7 +170,12 @@ namespace TopShopClient.ViewModels.Product
 
             await _productService.AddProductAsync(ProductData, ProductPhotoName);
 
-            await Shell.Current.GoToAsync("..");
+            ReturnToMainPageCommand();
+        }
+
+        private async void ReturnToMainPageCommand()
+        {
+            await Shell.Current.GoToAsync("//Main");
         }
 
         private async void ExecutePhotoUploadCommand()

@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using TopShopClient.Models;
 using TopShopClient.Services;
 
@@ -5,7 +6,7 @@ namespace TopShopClient.Pages.Product;
 
 public partial class SneakersPage : ContentPage
 {
-	public IList<ProductList> Products = new List<ProductList>();
+	public ObservableCollection<ProductList> Products = new ObservableCollection<ProductList>();
 	private ProductsService _productService = new ProductsService();
 
     public SneakersPage()
@@ -15,7 +16,7 @@ public partial class SneakersPage : ContentPage
 
     protected override async void OnAppearing()
     {
-        Products = await _productService.GetProductsAsync(((int)CategoryEnum.Sneakers));
+        Products = new ObservableCollection<ProductList>(await _productService.GetProductsAsync(((int)CategoryEnum.Sneakers)));
         CollectionViewProducts.ItemsSource = Products;
     }
 

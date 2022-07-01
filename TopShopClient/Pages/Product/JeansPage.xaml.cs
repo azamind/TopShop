@@ -24,4 +24,5 @@ public partial class JeansPage : ContentPage
         var product = e.CurrentSelection[0] as ProductList;
         await Shell.Current.GoToAsync($"products/details?productId={product.Id}");
     }
+
 }

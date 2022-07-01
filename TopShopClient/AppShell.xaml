@@ -4,10 +4,33 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:TopShopClient"
-    xmlns:pageProduct="clr-namespace:TopShopClient.Pages.Product"
-    Shell.FlyoutBehavior="Disabled">
+    xmlns:pageProduct="clr-namespace:TopShopClient.Pages.Product">
 
-    <TabBar>
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Route="Main">
+        <Tab Icon="sneakers.png" FlyoutItemIsVisible="False">
+            <ShellContent ContentTemplate="{DataTemplate pageProduct:SneakersPage}" />
+        </Tab>
+        <Tab Icon="hoodie.png" FlyoutItemIsVisible="False">
+            <ShellContent ContentTemplate="{DataTemplate pageProduct:HoodiesPage}" />
+        </Tab>
+        <Tab Icon="tshirt.png" FlyoutItemIsVisible="False">
+            <ShellContent ContentTemplate="{DataTemplate pageProduct:TShirtPage}" />
+        </Tab>
+        <Tab Icon="jacket.png" FlyoutItemIsVisible="False">
+            <ShellContent ContentTemplate="{DataTemplate pageProduct:JacketsPage}" />
+        </Tab>
+        <Tab Icon="jeans.png" FlyoutItemIsVisible="False">
+            <ShellContent ContentTemplate="{DataTemplate pageProduct:JeansPage}" />
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="Create Product">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate pageProduct:CreateEditPage}" />
+        </Tab>
+    </FlyoutItem>
+
+    <!--
+    <TabBar >
         <ShellContent 
             Icon="sneakers.png"
             ContentTemplate="{DataTemplate pageProduct:SneakersPage}" />
@@ -23,6 +46,6 @@
         <ShellContent 
             Icon="jeans.png"
             ContentTemplate="{DataTemplate pageProduct:JeansPage}" />
-    </TabBar>
+    </TabBar> -->
 
 </Shell>
