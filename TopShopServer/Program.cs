@@ -47,7 +47,7 @@ else
     app.UseMigrationsEndPoint();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

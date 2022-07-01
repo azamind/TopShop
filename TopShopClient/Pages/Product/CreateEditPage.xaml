@@ -2,10 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TopShopClient.Pages.Product.CreateEditPage"
-             Title="CreateEditPage"
+             Title="Create Edit Product"
              xmlns:vm="clr-namespace:TopShopClient.ViewModels.Product"
              >
-
     <ContentPage.Resources>
         <Style TargetType="Grid">
             <Setter Property="VisualStateManager.VisualStateGroups">
@@ -14,7 +13,7 @@
                         <VisualState x:Name="Normal" />
                         <VisualState x:Name="Selected">
                             <VisualState.Setters>
-                                <Setter Property="BackgroundColor" Value="LightSkyBlue" />
+                                <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>
@@ -23,127 +22,157 @@
         </Style>
     </ContentPage.Resources>
 
-    <ScrollView>
-        <StackLayout
-            Margin="20,0,20,0"
-            >
-            <Label Text="Title" FontSize="18"/>
-            <Entry
-                ClearButtonVisibility="WhileEditing"
-                Text="{Binding Title, Mode=TwoWay}"
-                />
-            <Picker
-                Title="Select Brand"
-                FontSize="18"
-                ItemsSource="{Binding Brands}"
-                ItemDisplayBinding="{Binding Name}"
-                SelectedItem="{Binding SelectedBrand}"
-                />
-            <Picker
-                Title="Select Category"
-                FontSize="18"
-                x:Name="Category"
-                ItemsSource="{Binding Categories}"
-                ItemDisplayBinding="{Binding Name}"
-                SelectedItem="{Binding SelectedCategory}"
-                />
-            <Label Text="Code" FontSize="18"/>
-            <Entry
-                x:Name="Code"
-                ClearButtonVisibility="WhileEditing"
-                Text="{Binding Product.Code, Mode=TwoWay}"
-                />
-            <Label Text="Article" FontSize="18"/>
-            <Entry
-                x:Name="Article"
-                ClearButtonVisibility="WhileEditing"
-                Text="{Binding Product.Article, Mode=TwoWay}"
-                />
-            <Label Text="Price" FontSize="18"/>
-            <Entry
-                x:Name="Price"
-                Text="{Binding Product.Price, Mode=TwoWay}"
-                />
-            <Label Text="Short Description" FontSize="18"/>
-            <Editor
-                HeightRequest="50"
-                x:Name="ShortDescription"
-                Text="{Binding Product.ShortDescription, Mode=TwoWay}"
-                />
-            <Label Text="Description" FontSize="18"/>
-            <Editor
-                HeightRequest="100"
-                x:Name="Description"
-                Text="{Binding Product.Description, Mode=TwoWay}"
-                />
-            
-            <Label Text="Select Sizes" FontSize="18"/>
+    <ScrollView Margin="10,20">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-            <StackLayout Margin="20">
+            <StackLayout Grid.Row="0">
+                <Label Text="Title" FontSize="18"/>
+                <Entry
+                    ClearButtonVisibility="WhileEditing"
+                    Text="{Binding Title, Mode=TwoWay}"
+                />
+            </StackLayout>
+            <StackLayout Grid.Row="1">
+                <Picker
+                    Title="Select Brand"
+                    FontSize="18"
+                    ItemsSource="{Binding Brands}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SelectedBrand}"
+                />
+            </StackLayout>
+            <StackLayout Grid.Row="2">
+                <Picker
+                    Title="Select Category"
+                    FontSize="18"
+                    x:Name="Category"
+                    ItemsSource="{Binding Categories}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SelectedCategory}"
+                />
+            </StackLayout>
+            <StackLayout Grid.Row="3">
+                <Label Text="Select Sizes" FontSize="18"/>
                 <CollectionView 
+                    EmptyView="No items to display"
+                    Margin="20"
                     ItemsSource="{Binding Sizes}"
                     SelectionMode="Multiple"
-                    ItemsLayout="HorizontalList"
                     SelectedItems="{Binding SelectedSizes, Mode=TwoWay}"
-                    >
+                >
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" Span="4" />
+                    </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Grid Padding="10">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="20" />
-                                    <RowDefinition Height="10" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50" />
-                                    <ColumnDefinition Width="10" />
-                                </Grid.ColumnDefinitions>
-                                <Label HorizontalTextAlignment="Center" Text="{Binding Name}" FontSize="18"/>
+                            <Grid Margin="5">
+                                <Label
+                                Padding="0,5"
+                                HorizontalOptions="Center" 
+                                Text="{Binding Name}" 
+                                FontSize="16"
+                            />
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </StackLayout>
 
-            <Label Text="Photo" FontSize="18"/>
-            <Button
-                HorizontalOptions="Start"
-                Text="Choose Photo"
-                Command="{Binding PhotoUploadCommand}"
+            <StackLayout Grid.Row="4">
+                <Label Text="Code" FontSize="18"/>
+                <Entry
+                    x:Name="Code"
+                    ClearButtonVisibility="WhileEditing"
+                    Text="{Binding Product.Code, Mode=TwoWay}"
                 />
-
-            <Image Source="{Binding Path}" HorizontalOptions="Start" HeightRequest="250" WidthRequest="250" />
-
-            <!-- This collection need for multiple image display (implement letter)
+            </StackLayout>
             
-            <CollectionView ItemsSource="{Binding ProductPhotos}"
-                ItemsLayout="HorizontalList">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Padding="10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="100" />
-                                <RowDefinition Height="100" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto" />
-                                <ColumnDefinition Width="auto" />
-                            </Grid.ColumnDefinitions>
-                            <Image Grid.RowSpan="2"
-                                Source="{Binding Path}"
-                                Aspect="AspectFill" />
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>-->
-            
-            <Button
-                Command="{Binding SaveCommand}"
-                Margin="0, 10, 0, 0"
-                Text="Send"
-                FontAttributes="Bold"
-                FontSize="20"
-                HorizontalOptions="StartAndExpand"
+            <StackLayout Grid.Row="5">
+                <Label Text="Article" FontSize="18"/>
+                <Entry
+                    x:Name="Article"
+                    ClearButtonVisibility="WhileEditing"
+                    Text="{Binding Product.Article, Mode=TwoWay}"
                 />
-        </StackLayout>
+            </StackLayout>
+
+            <StackLayout Grid.Row="6">
+                <Label Text="Price" FontSize="18"/>
+                <Entry
+                    x:Name="Price"
+                    Text="{Binding Product.Price, Mode=TwoWay}"
+                />
+            </StackLayout>
+            
+            <StackLayout Grid.Row="7">
+                <Label Text="Short Description" FontSize="18"/>
+                <Editor
+                    HeightRequest="50"
+                    x:Name="ShortDescription"
+                    Text="{Binding Product.ShortDescription, Mode=TwoWay}"
+                    Keyboard="Chat"
+                />
+            </StackLayout>
+            <StackLayout Grid.Row="8">
+                <Label Text="Description" FontSize="18"/>
+                <Editor
+                    HeightRequest="100"
+                    x:Name="Description"
+                    Text="{Binding Product.Description, Mode=TwoWay}"
+                    Keyboard="Chat"
+                />
+            </StackLayout>
+            <StackLayout Grid.Row="9">
+                <Button
+                    Margin="0,10,0,0"
+                    HorizontalOptions="Start"
+                    Text="Choose Photo"
+                    Command="{Binding PhotoUploadCommand}"
+                />    
+            </StackLayout>
+            <StackLayout Grid.Row="10">
+                <Image
+                    Source="{Binding Path}"
+                    HorizontalOptions="Start" 
+                    HeightRequest="250" 
+                    WidthRequest="250" 
+                />    
+            </StackLayout>
+            <StackLayout Grid.Row="11" HeightRequest="100">
+                <Grid ColumnSpacing="5" ColumnDefinitions="1*, 1*" RowDefinitions="1*, Auto">
+                    <Button
+                        Grid.Row="0" Grid.Column="0"
+                        Command="{Binding SaveCommand}"
+                        Text="Send"
+                        FontAttributes="Bold"
+                        FontSize="20"
+                    />
+                    <Button
+                        Grid.Row="0" Grid.Column="1"
+                        Command="{Binding CancelCommand}"
+                        Text="Cancel"
+                        FontAttributes="Bold"
+                        FontSize="20"
+                    />
+                </Grid>
+            </StackLayout>
+        </Grid>
     </ScrollView>
 </ContentPage>

@@ -53,7 +53,7 @@ namespace TopShopServer.Controllers
 
                 if (photos != null)
                 {
-                    photoLinks = _configuration.GetValue<string>("hostRunning") + "/api/v1/products/images/" + photos.First();
+                    photoLinks = "/api/v1/products/images/" + photos.First();
                 }
 
                 productsDto.Add(new ProductDto
@@ -89,7 +89,7 @@ namespace TopShopServer.Controllers
             {
                 foreach(var photo in photos)
                 {
-                    photoLinks.Add(_configuration.GetValue<string>("hostRunning") + "/api/v1/products/images/" + photo);
+                    photoLinks.Add("/api/v1/products/images/" + photo);
                 }
             }
 

@@ -1,4 +1,6 @@
-﻿namespace TopShopClient
+﻿using TopShopClient.Pages;
+
+namespace TopShopClient
 {
     public partial class App : Application
     {

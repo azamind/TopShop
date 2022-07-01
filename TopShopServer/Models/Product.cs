@@ -33,8 +33,8 @@ namespace TopShopServer.Models
         [NotMapped]
         public IEnumerable<int> Sizes { get; set; } = null!;
         [NotMapped]
-        public IEnumerable<ProductSizeDto> ProductSizes { get; set; } = null!;
+        public IEnumerable<ProductSizeDto> ProductSizes { get; set; } = new List<ProductSizeDto>();
         [NotMapped]
-        public IEnumerable<string> PhotoLinks { get; set; } = null!;
+        public IEnumerable<string> PhotoLinks { get; set; } = new List<string>();
     }
 }
