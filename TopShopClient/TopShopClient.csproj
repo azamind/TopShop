@@ -12,7 +12,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<!-- Display name -->
-		<ApplicationTitle>TopShop</ApplicationTitle>
+		<ApplicationTitle>TopShopClient</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.topshopclient</ApplicationId>
