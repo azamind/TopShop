@@ -22,3 +22,5 @@ This project created only UWP and Android platforms
 #### Product Create Edit Page
 ![Screenshot](Screenshots/uwp-create-edit-product-1.png)
 ![Screenshot](Screenshots/uwp-create-edit-product-2.png)
+#### UWP flayout menu
+![Screenshot](Screenshots/uwp-flayout-menu.png)
