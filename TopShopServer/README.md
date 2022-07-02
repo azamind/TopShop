@@ -2,6 +2,6 @@
 #### Project name is TopShop for server side.
 This project provides access REST Api Resource for client side.
 ### Below we can see the swagger documentation screen
-![Screenshot](endpoints.png)
+![Screenshot](swagger-endpoints.png)
 ### Also screen using schemas
-![Screenshot](schemas.png)
+![Screenshot](swagger-schemas.png)
